@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTPGZ964FD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DTPGZ964FD');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butcher Block - Premium Meat Supplier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+     
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <!-- Hamburger Button -->
+            <button class="hamburger-btn" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <!-- Menu Overlay -->
+            <div class="menu-overlay" id="menuOverlay"></div>
+            <!-- Side Menu -->
+            <nav class="side-menu" id="sideMenu">
+                <div class="menu-header">
+                    <img src="images-logo/butcherblock-logo.jpg" alt="Butcher Block Logo">
+                    <h2>BUTCHER BLOCK</h2>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <a href="index.html" class="menu-link" onclick="toggleMenu()">
+                            <span><i class="fas fa-home"></i> Hive Times</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="javascript:void(0)" class="menu-link about-business-link" onclick="showBusinessModal(); toggleMenu()">
+                            <span><i class="fas fa-info-circle"></i> About Business</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-link" onclick="toggleSubmenu('beef')">
+                            <span><i class="fas fa-box"></i> Beef</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="submenu" id="beef-submenu">
+                            <a href="#bulk-sales" class="submenu-item" onclick="scrollToSection('bulk-sales')">Bulk Sales</a>
+                            <a href="#beef" class="submenu-item" onclick="scrollToSection('beef')">Beef Cuts</a>
+                            <a href="#steaks" class="submenu-item" onclick="scrollToSection('steaks')">Steaks</a>
+                            <a href="#oxtail" class="submenu-item" onclick="scrollToSection('oxtail')">Oxtail</a>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-link" onclick="toggleSubmenu('lamb')">
+                            <span><i class="fas fa-box"></i> Lamb</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="submenu" id="lamb-submenu">
+                            <a href="#whole-half" class="submenu-item" onclick="scrollToSection('whole-half')">Whole/Half Lamb</a>
+                            <a href="#lamb" class="submenu-item" onclick="scrollToSection('lamb')">Lamb Cuts</a>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-link" onclick="toggleSubmenu('chicken')">
+                            <span><i class="fas fa-box"></i> Chicken</span>
+                            <i class="fas fa-chevron-down arrow"></i>
+                        </div>
+                        <div class="submenu" id="chicken-submenu">
+                            <a href="#skin-on" class="submenu-item" onclick="scrollToSection('skin-on')">Skin On</a>
+                            <a href="#skin-off" class="submenu-item" onclick="scrollToSection('skin-off')">Skin Off</a>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <a href="#processed-meat" class="menu-link" onclick="scrollToSection('processed-meat')">
+                            <span><i class="fas fa-box"></i> Processed Meat</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="#hampers" class="menu-link" onclick="scrollToSection('hampers')">
+                            <span><i class="fas fa-gift"></i> Hampers</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-footer">
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +27 61 502 3930</p>
+                        <p><i class="fas fa-envelope"></i> info@butcherblock.co.za</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/27615023930" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </nav>
+            <!-- Logo -->
+            <div class="logo-container">
+                <img src="images-logo/butcherblock-logo.jpg" alt="Logo" class="logo-img">
+                <div class="logo">BUTCHER BLOCK</div>
+            </div>
+            <!-- Cart -->
+            <button class="cart-btn" onclick="showCartModal()">
+                <i class="fas fa-shopping-cart"></i> Cart (<span id="cartCount">0</span>)
+            </button>
+        </div>
+        <!-- AI Search Bar -->
+        <div class="ai-search-bar-container">
+            <input type="text" id="aiProductSearchInput" placeholder="e.g. steaks under R250, lamb chops...">
+        </div>
+    </header>
+    
+    <!-- Slider Container -->
+    <div id="slider-container">
+        <!-- Default slider content in case fetch fails -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="images-butchershop/slider1.jpg" alt="Premium Meat Cuts">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images-butchershop/slider2.jpg" alt="Butcher Block Store">
+                </div>
+                <div class="swiper-slide">
+                    <img src="images-butchershop/slider3.jpg" alt="Fresh Meat Quality">
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    
+    <!-- Business Modal -->
+    <div class="business-modal-overlay" id="businessModalOverlay">
+        <div class="business-modal" id="businessModal">
+            <button class="close-business-modal" id="closeBusinessModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="business-modal-content">
+                <!-- Business Header -->
+                <div class="business-hero">
+                    <img src="images-logo/butcherblock-logo.jpg" alt="Butcher Block Logo" class="business-hero-logo">
+                    <h1 class="business-hero-title">Butcher Block</h1>
+                    <p class="business-hero-tagline">Premium Meat Supplier for Restaurants & Home Chefs</p>
+                </div>
+                <!-- Info Grid -->
+                <div class="business-info-grid">
+                    <!-- Section: About -->
+                    <section class="business-section">
+                        <h2><i class="fas fa-info-circle"></i> About Us</h2>
+                        <p>Established in 2018, Butcher Block is a family business run on family values. We supply premium meat to clients across South Africa with the highest quality products from our own production and trusted partners. Relentless about quality, uncompromising about food safety, and passionate about service – we strive to build lasting relationships and add value to our customers.</p>
+                    </section>
+                    <!-- Section: Contact & Hours -->
+                    <section class="business-section">
+                        <h2><i class="fas fa-clock"></i> Opening Hours</h2>
+                        <ul>
+                            <li>Monday – Friday: 6:00 AM – 6:00 PM</li>
+                            <li>Saturday: Closed</li>
+                            <li>Sunday: Closed</li>
+                        </ul>
+                        <h3 style="margin-top: 15px;"><i class="fas fa-map-marker-alt"></i> 239 Norda St, Leslie, Thuli Fakude, 2265</h3>
+                        <h3 style="margin-top: 15px;"><i class="fas fa-phone"></i> +27 61 502 3930</h3>
+                        <p><i class="fas fa-envelope"></i> info@butcherblock.co.za</p>
+                    </section>
+                    <!-- Section: Gallery -->
+                    <section class="business-section">
+                        <h2><i class="fas fa-images"></i> Our Facility</h2>
+                        <div class="business-gallery">
+                            <img src="images-butchershop/store1.jpg" alt="Storefront" class="business-gallery-img">
+                            <img src="images-butchershop/store2.jpg" alt="Meat Display" class="business-gallery-img">
+                            <img src="images-butchershop/warehouse.jpg" alt="Warehouse" class="business-gallery-img">
+                        </div>
+                    </section>
+                    <!-- Section: Map -->
+                    <section class="business-section business-map-section">
+                        <h2><i class="fas fa-map-marker-alt"></i> Find Us</h2>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.946983692892!2d30.828561315381334!3d-29.776825181433427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zItCw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw4oKw!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
+                            width="100%"
+                            height="200"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product Sections -->
+    <div class="content-section">
+        <h2 id="bulk-sales" class="section-title">BULK SALES</h2>
+        <div class="products-grid" id="bulkSalesProductsGrid">
+            <div class="product-card" data-id="forequarter-a-grade-500kg" data-category="bulk-beef" data-price="0.00">
+                <img src="images-butchershop/forequater.jpg" alt="Forequarter A Grade" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Forequarter A Grade</div>
+                    <div class="product-description">Large bulk portion for processing or resale.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'forequarter-a-grade-500kg', name: 'Forequarter A Grade (500kg)', price: 0.00, quantity: 1, image: 'images-butchershop/forequater.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="hindquarter-a-grade-500kg" data-category="bulk-beef" data-price="0.00">
+                <img src="images-butchershop/hindquater.jpg" alt="Hindquarter A Grade" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Hindquarter A Grade</div>
+                    <div class="product-description">Large bulk portion for processing or resale.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'hindquarter-a-grade-500kg', name: 'Hindquarter A Grade (500kg)', price: 0.00, quantity: 1, image: 'images-butchershop/hindquater.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="beef" class="section-title">BEEF CUTS</h2>
+        <div class="products-grid" id="beefCutsProductsGrid">
+            <div class="product-card" data-id="beef-short-rib" data-category="beef-cuts" data-price="154.90">
+                <img src="images-butchershop/short-rib.jpg" alt="Short Rib" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Short Rib</div>
+                    <div class="product-description">Ideal for braising and slow cooking.</div>
+                    <div class="product-price">R154.90</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'beef-short-rib', name: 'Short Rib', price: 154.90, quantity: 1, image: 'images-butchershop/short-rib.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="beef-chuck" data-category="beef-cuts" data-price="149.99">
+                <img src="images-butchershop/beef-chuck.jpg" alt="Chuck" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Chuck</div>
+                    <div class="product-description">Excellent for roasts, pot roast, or stewing meat.</div>
+                    <div class="product-price">R149.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'beef-chuck', name: 'Chuck', price: 149.99, quantity: 1, image: 'images-butchershop/beef-chuck.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="beef-brisket" data-category="beef-cuts" data-price="139.99">
+                <img src="images-butchershop/beef-brisket.jpg" alt="Brisket" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Brisket</div>
+                    <div class="product-description">Perfect for smoking or corned beef.</div>
+                    <div class="product-price">R139.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'beef-brisket', name: 'Brisket', price: 139.99, quantity: 1, image: 'images-butchershop/beef-brisket.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="beef-shin" data-category="beef-cuts" data-price="129.99">
+                <img src="images-butchershop/beef-shin.jpg" alt="Shin" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Shin</div>
+                    <div class="product-description">Bone-in cut for rich stocks, stews, and Osso Buco.</div>
+                    <div class="product-price">R129.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'beef-shin', name: 'Shin', price: 129.99, quantity: 1, image: 'images-butchershop/beef-shin.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="beef-stew" data-category="beef-cuts" data-price="139.99">
+                <img src="images-butchershop/beef-stew.jpg" alt="Stew Meat" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Stew Meat</div>
+                    <div class="product-description">Pre-cut stewing cubes (various cuts).</div>
+                    <div class="product-price">R139.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'beef-stew', name: 'Stew Meat', price: 139.99, quantity: 1, image: 'images-butchershop/beef-stew.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="beef-goulash" data-category="beef-cuts" data-price="165.99">
+                <img src="images-butchershop/beef-goulash.jpg" alt="Goulash Meat" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Goulash</div>
+                    <div class="product-description">Thinly sliced strips for goulash or stirfry.</div>
+                    <div class="product-price">R165.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'beef-goulash', name: 'Goulash', price: 165.99, quantity: 1, image: 'images-butchershop/beef-goulash.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="steaks" class="section-title">PREMIUM STEAKS</h2>
+        <div class="products-grid" id="premiumSteaksProductsGrid">
+            <div class="product-card" data-id="t-bone" data-category="premium-steaks" data-price="185.95">
+                <img src="images-butchershop/steak-tbone.jpg" alt="T-Bone Steak" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">T-Bone</div>
+                    <div class="product-description">Includes the strip loin and tenderloin connected by a T-shaped bone.</div>
+                    <div class="product-price">R185.95</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 't-bone', name: 'T-Bone', price: 185.95, quantity: 1, image: 'images-butchershop/steak-tbone.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="sirloin" data-category="premium-steaks" data-price="225.95">
+                <img src="images-butchershop/steak-sirloin.jpg" alt="Sirloin Steak" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Sirloin</div>
+                    <div class="product-description">Versatile and flavorful cut from the rear back portion.</div>
+                    <div class="product-price">R225.95</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'sirloin', name: 'Sirloin', price: 225.95, quantity: 1, image: 'images-butchershop/steak-sirloin.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="ribeye" data-category="premium-steaks" data-price="389.95">
+                <img src="images-butchershop/steak-ribeye.jpg" alt="Ribeye Steak" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Ribeye</div>
+                    <div class="product-description">Known for its rich marbling and flavor, from the rib section.</div>
+                    <div class="product-price">R389.95</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'ribeye', name: 'Ribeye', price: 389.95, quantity: 1, image: 'images-butchershop/steak-ribeye.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="fillet" data-category="premium-steaks" data-price="399.95">
+                <img src="images-butchershop/steak-fillet.jpg" alt="Fillet Steak" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Fillet</div>
+                    <div class="product-description">The most tender cut, also known as Tenderloin or Filet Mignon.</div>
+                    <div class="product-price">R399.95</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'fillet', name: 'Fillet', price: 399.95, quantity: 1, image: 'images-butchershop/steak-fillet.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="tomahawk" data-category="premium-steaks" data-price="279.95">
+                <img src="images-butchershop/steak-tomahawk.jpg" alt="Tomahawk Steak" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Tomahawk</div>
+                    <div class="product-description">Ribeye cut with the full rib bone left intact.</div>
+                    <div class="product-price">R279.95</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'tomahawk', name: 'Tomahawk', price: 279.95, quantity: 1, image: 'images-butchershop/steak-tomahawk.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="rump" data-category="premium-steaks" data-price="220.95">
+                <img src="images-butchershop/steak-rump.jpg" alt="Rump Steak" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Rump</div>
+                    <div class="product-description">A flavorful steak cut from the back end of the cow.</div>
+                    <div class="product-price">R220.95</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'rump', name: 'Rump', price: 220.95, quantity: 1, image: 'images-butchershop/steak-rump.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="oxtail" class="section-title">OXTAIL & SPECIALTY CUTS</h2>
+        <div class="products-grid" id="specialtyCutsProductsGrid">
+            <div class="product-card" data-id="tongue" data-category="specialty-cuts" data-price="69.00">
+                <img src="images-butchershop/oxtail-tongue.jpg" alt="Beef Tongue" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Tongue</div>
+                    <div class="product-description">Requires slow cooking until tender, often cured or pickled.</div>
+                    <div class="product-price">R69.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'tongue', name: 'Tongue', price: 69.00, quantity: 1, image: 'images-butchershop/oxtail-tongue.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="tripe" data-category="specialty-cuts" data-price="120.00">
+                <img src="images-butchershop/oxtail-tripe.jpg" alt="Tripe" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Tripe</div>
+                    <div class="product-description">The lining of the stomach, used in stews and soups (e.g., Mala Mogodu).</div>
+                    <div class="product-price">R120.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'tripe', name: 'Tripe', price: 120.00, quantity: 1, image: 'images-butchershop/oxtail-tripe.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="trotters" data-category="specialty-cuts" data-price="79.00">
+                <img src="images-butchershop/oxtail-trotters.jpg" alt="Trotters" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Trotters</div>
+                    <div class="product-description">Feet, high in collagen for rich broth and stews.</div>
+                    <div class="product-price">R79.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'trotters', name: 'Trotters', price: 79.00, quantity: 1, image: 'images-butchershop/oxtail-trotters.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="processed-meat" class="section-title">PROCESSED MEAT</h2>
+        <div class="products-grid" id="processedMeatProductsGrid">
+            <div class="product-card" data-id="processed-mince" data-category="processed-meat" data-price="125.00">
+                <img src="images-butchershop/processed-mince.jpg" alt="Mince" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Mince</div>
+                    <div class="product-description">Finely ground meat, ideal for sauces, burgers, and fillings.</div>
+                    <div class="product-price">R125.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'processed-mince', name: 'Mince', price: 125.00, quantity: 1, image: 'images-butchershop/processed-mince.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="processed-boerewors" data-category="processed-meat" data-price="135.00">
+                <img src="images-butchershop/processed-boerewors.jpg" alt="Boerewors" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Boerewors</div>
+                    <div class="product-description">Traditional South African sausage, excellent for the braai (BBQ).</div>
+                    <div class="product-price">R135.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'processed-boerewors', name: 'Boerewors', price: 135.00, quantity: 1, image: 'images-butchershop/processed-boerewors.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="processed-braaiwors" data-category="processed-meat" data-price="125.00">
+                <img src="images-butchershop/processed-boerewors.jpg" alt="Braaiwors" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Braaiwors</div>
+                    <div class="product-description">General term for sausage intended for grilling.</div>
+                    <div class="product-price">R125.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'processed-braaiwors', name: 'Braaiwors', price: 125.00, quantity: 1, image: 'images-butchershop/processed-boerewors.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="processed-meat-balls" data-category="processed-meat" data-price="100.00">
+                <img src="images-butchershop/processed-meatballs.jpg" alt="Meat balls" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Meat balls</div>
+                    <div class="product-description">Ready-made meat spheres, great for stews or spaghetti.</div>
+                    <div class="product-price">R100.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'processed-meat-balls', name: 'Meat balls', price: 100.00, quantity: 1, image: 'images-butchershop/processed-meatballs.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="processed-patties" data-category="processed-meat" data-price="110.00">
+                <img src="images-butchershop/processed-patties.jpg" alt="Patties" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Patties</div>
+                    <div class="product-description">Pressed portions of meat, perfect for quick burgers.</div>
+                    <div class="product-price">R110.00</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'processed-patties', name: 'Patties', price: 110.00, quantity: 1, image: 'images-butchershop/processed-patties.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="whole-half" class="section-title">WHOLE / HALF LAMB</h2>
+        <div class="products-grid" id="carcassProductsGrid">
+            <div class="product-card" data-id="whole-half-lamb" data-category="whole-half" data-price="0.00">
+                <img src="images-butchershop/lamb-whole-half.jpg" alt="Whole or Half Carcass" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Whole / Half Carcass</div>
+                    <div class="product-description">Large, unprocessed bulk portion for full customization.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'whole-half-lamb', name: 'Whole / Half Carcass', price: 0.00, quantity: 1, image: 'images-butchershop/lamb-whole-half.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="lamb" class="section-title">LAMB CUTS</h2>
+        <div class="products-grid" id="lambCutsProductsGrid">
+            <div class="product-card" data-id="lamb-loin-chop" data-category="lamb-cuts" data-price="249.99">
+                <img src="images-butchershop/lamb-loinchop.jpg" alt="Lamb Loin Chop" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Loin Chop</div>
+                    <div class="product-description">Tender and lean chops cut from the back.</div>
+                    <div class="product-price">R249.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'lamb-loin-chop', name: 'Lamb Loin Chop', price: 249.99, quantity: 1, image: 'images-butchershop/lamb-loinchop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="lamb-best-end" data-category="lamb-cuts" data-price="245.99">
+                <img src="images-butchershop/lamb-bestend.jpg" alt="Lamb Best End" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Best End (Rib)</div>
+                    <div class="product-description">Cut from the rib section, ideal for rack of lamb.</div>
+                    <div class="product-price">R245.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'lamb-best-end', name: 'Lamb Best End', price: 245.99, quantity: 1, image: 'images-butchershop/lamb-bestend.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="lamb-leg-chop" data-category="lamb-cuts" data-price="239.99">
+                <img src="images-butchershop/lamb-legchop.jpg" alt="Leg Chop" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Leg Chop</div>
+                    <div class="product-description">Chops cut from the leg, highly versatile.</div>
+                    <div class="product-price">R239.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'lamb-leg-chop', name: 'Leg Chop', price: 239.99, quantity: 1, image: 'images-butchershop/lamb-legchop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="lamb-leg-of-lamb" data-category="lamb-cuts" data-price="239.99">
+                <img src="images-butchershop/lamb-leg.jpg" alt="Leg of Lamb" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Leg of Lamb</div>
+                    <div class="product-description">A large, popular roast joint.</div>
+                    <div class="product-price">R239.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'lamb-leg-of-lamb', name: 'Leg of Lamb', price: 239.99, quantity: 1, image: 'images-butchershop/lamb-leg.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="lamb-shank" data-category="lamb-cuts" data-price="229.99">
+                <img src="images-butchershop/lamb-shank.jpg" alt="Lamb Shank" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Shank</div>
+                    <div class="product-description">Lower portion of the leg, best slow-cooked.</div>
+                    <div class="product-price">R229.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'lamb-shank', name: 'Lamb Shank', price: 229.99, quantity: 1, image: 'images-butchershop/lamb-shank.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="lamb-curry" data-category="lamb-cuts" data-price="189.99">
+                <img src="images-butchershop/lamb-curry.jpg" alt="Lamb Curry Meat" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Lamb Curry Meat</div>
+                    <div class="product-description">Pre-cut cubes ideal for stews and curries.</div>
+                    <div class="product-price">R189.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'lamb-curry', name: 'Lamb Curry Meat', price: 189.99, quantity: 1, image: 'images-butchershop/lamb-curry.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="skin-on" class="section-title">CHICKEN (SKIN ON)</h2>
+        <div class="products-grid" id="chickenSkinOnProductsGrid">
+            <div class="product-card" data-id="chicken-whole-skin-on" data-category="chicken-skin-on" data-price="89.99">
+                <img src="images-butchershop/skinon-whole.jpg" alt="Whole Bird Skin On" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Whole Bird (Skin On)</div>
+                    <div class="product-description">Whole chicken, with skin, perfect for roasting.</div>
+                    <div class="product-price">R89.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-whole-skin-on', name: 'Whole Bird Skin On', price: 89.99, quantity: 1, image: 'images-butchershop/skinon-whole.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-12pcs-skin-on" data-category="chicken-skin-on" data-price="95.50">
+                <img src="images-butchershop/skinn-12pc.jpg" alt="12 Pcs Chicken Skin On" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">12 Pcs Chicken (Skin On)</div>
+                    <div class="product-description">Mixed portions, bone-in and skin-on.</div>
+                    <div class="product-price">R95.50</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-12pcs-skin-on', name: '12 Pcs Chicken Skin On', price: 95.50, quantity: 1, image: 'images-butchershop/skinn-12pc.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-drum-sticks-skin-on" data-category="chicken-skin-on" data-price="0.00">
+                <img src="images-butchershop/skinon-drumsticks.jpg" alt="Drum Sticks Skin On" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Drum Sticks (Skin On)</div>
+                    <div class="product-description">Lower portion of the leg, great for grilling.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-drum-sticks-skin-on', name: 'Drum Sticks Skin On', price: 0.00, quantity: 1, image: 'images-butchershop/skinon-drumsticks.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-thighs-skin-on" data-category="chicken-skin-on" data-price="0.00">
+                <img src="images-butchershop/skinon-thigh.jpg" alt="Thighs Skin On" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Thighs (Skin On)</div>
+                    <div class="product-description">Dark meat cut, flavorful and moist.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-thighs-skin-on', name: 'Thighs Skin On', price: 0.00, quantity: 1, image: 'images-butchershop/skinon-thigh.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-leg-quarters-skin-on" data-category="chicken-skin-on" data-price="85.50">
+                <img src="images-butchershop/skinon-thigh.jpg" alt="Leg Quarters Skin On" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Leg Quarters (Skin On)</div>
+                    <div class="product-description">Whole leg cut, including the thigh and drumstick.</div>
+                    <div class="product-price">R85.50</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-leg-quarters-skin-on', name: 'Leg Quarters Skin On', price: 85.50, quantity: 1, image: 'images-butchershop/skinon-thigh.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-fillets-skin-on" data-category="chicken-skin-on" data-price="95.50">
+                <img src="images-butchershop/skinon-fillits.jpg" alt="Fillets Skin On" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Fillets (Skin On)</div>
+                    <div class="product-description">Breast meat with the skin left attached.</div>
+                    <div class="product-price">R95.50</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-fillets-skin-on', name: 'Fillets Skin On', price: 95.50, quantity: 1, image: 'images-butchershop/skinon-fillits.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="skin-off" class="section-title">CHICKEN (SKIN OFF)</h2>
+        <div class="products-grid" id="chickenSkinOffProductsGrid">
+            <div class="product-card" data-id="chicken-whole-bird-skin-off" data-category="chicken-skin-off" data-price="89.99">
+                <img src="images-butchershop/skinoff-wholebird.jpg" alt="Whole Bird Skin Off" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Whole Bird (Skin Off)</div>
+                    <div class="product-description">Whole chicken, skin removed for leaner preparation.</div>
+                    <div class="product-price">R89.99</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-whole-bird-skin-off', name: 'Whole Bird Skin Off', price: 89.99, quantity: 1, image: 'images-butchershop/skinoff-wholebird.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-12pcs-skin-off" data-category="chicken-skin-off" data-price="95.50">
+                <img src="images-butchershop/skinoff-12pc.jpg" alt="12 Pcs Chicken Skin Off" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">12 Pcs Chicken (Skin Off)</div>
+                    <div class="product-description">Mixed portions, bone-in and skin-off.</div>
+                    <div class="product-price">R95.50</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-12pcs-skin-off', name: '12 Pcs Chicken Skin Off', price: 95.50, quantity: 1, image: 'images-butchershop/skinoff-12pc.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-drum-sticks-skin-off" data-category="chicken-skin-off" data-price="0.00">
+                <img src="images-butchershop/skinoff-drumsticks.jpg" alt="Drum Sticks Skin Off" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Drum Sticks (Skin Off)</div>
+                    <div class="product-description">Lower portion of the leg, skin removed.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-drum-sticks-skin-off', name: 'Drum Sticks Skin Off', price: 0.00, quantity: 1, image: 'images-butchershop/skinoff-drumsticks.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-thighs-skin-off" data-category="chicken-skin-off" data-price="0.00">
+                <img src="images-butchershop/skinoff-thigh.jpg" alt="Thighs Skin Off" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Thighs (Skin Off)</div>
+                    <div class="product-description">Dark meat cut, skin removed.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-thighs-skin-off', name: 'Thighs Skin Off', price: 0.00, quantity: 1, image: 'images-butchershop/skinoff-thigh.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-leg-quarters-skin-off" data-category="chicken-skin-off" data-price="85.50">
+                <img src="images-butchershop/skinoff-leg.jpg" alt="Leg Quarters Skin Off" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Leg Quarters (Skin Off)</div>
+                    <div class="product-description">Whole leg cut, skin removed.</div>
+                    <div class="product-price">R85.50</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-leg-quarters-skin-off', name: 'Leg Quarters Skin Off', price: 85.50, quantity: 1, image: 'images-butchershop/skinoff-leg.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="chicken-fillets-skin-off" data-category="chicken-skin-off" data-price="95.50">
+                <img src="images-butchershop/skinoff-filits.jpg" alt="Fillets Skin Off" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Fillets (Skin Off)</div>
+                    <div class="product-description">Boneless, skinless breast meat.</div>
+                    <div class="product-price">R95.50</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chicken-fillets-skin-off', name: 'Fillets Skin Off', price: 95.50, quantity: 1, image: 'images-butchershop/skinoff-filits.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h2 id="hampers" class="section-title">MEAT HAMPERS</h2>
+        <div class="products-grid" id="hamperProductsGrid">
+            <div class="product-card" data-id="hamper-1" data-category="meat-hampers" data-price="0.00">
+                <img src="images-butchershop/hamper1.jpg" alt="Meat Hamper 1" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Meat Hamper 1</div>
+                    <div class="product-description">Assorted bulk cuts for home or business use.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'hamper-1', name: 'Meat Hamper 1', price: 0.00, quantity: 1, image: 'images-butchershop/hamper1.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="hamper-2" data-category="meat-hampers" data-price="0.00">
+                <img src="images-butchershop/hamper2.jpg" alt="Meat Hamper 2" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Meat Hamper 2</div>
+                    <div class="product-description">Assorted bulk cuts for home or business use.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'hamper-2', name: 'Meat Hamper 2', price: 0.00, quantity: 1, image: 'images-butchershop/hamper2.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="hamper-3" data-category="meat-hampers" data-price="0.00">
+                <img src="images-butchershop/hamper3.jpg" alt="Meat Hamper 3" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Meat Hamper 3</div>
+                    <div class="product-description">Assorted bulk cuts for home or business use.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'hamper-3', name: 'Meat Hamper 3', price: 0.00, quantity: 1, image: 'images-butchershop/hamper3.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card" data-id="hamper-4" data-category="meat-hampers" data-price="0.00">
+                <img src="images-butchershop/hamper4.jpg" alt="Meat Hamper 4" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Meat Hamper 4</div>
+                    <div class="product-description">Assorted bulk cuts for home or business use.</div>
+                    <div class="product-price">Call for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'hamper-4', name: 'Meat Hamper 4', price: 0.00, quantity: 1, image: 'images-butchershop/hamper4.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PRODUCT MODAL -->
+    <div class="product-modal-overlay">
+        <div class="product-modal">
+            <button class="close-product-modal" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+            <div class="product-modal-content">
+                <div class="product-modal-images">
+                    <img src="" alt="Main Product Image" class="main-product-image" id="modalMainImage">
+                    <div class="product-thumbnails" id="productThumbnails"></div>
+                </div>
+                <div class="product-modal-details">
+                    <h3 class="product-modal-title" id="modalProductName">Product Name</h3>
+                    <div class="product-modal-price" id="modalProductPrice">R0.00</div>
+                    <p class="product-modal-description" id="modalProductDescription">Description</p>
+                    <div class="quantity-selector">
+                        <div class="variant-title">Quantity:</div>
+                        <button class="quantity-btn" id="decreaseQuantity">-</button>
+                        <span class="quantity-display" id="modalQuantity">1</span>
+                        <button class="quantity-btn" id="increaseQuantity">+</button>
+                    </div>
+                    <button class="add-to-cart-modal-btn" id="modalAddToCartBtn">
+                        <i class="fas fa-cart-plus"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CART MODAL -->
+    <div class="cart-modal-overlay">
+        <div class="cart-modal">
+            <h3 class="cart-modal-title"><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h3>
+            <div class="cart-items">
+                <p style="text-align: center; color: #555;">Your cart is empty.</p>
+            </div>
+            <div class="cart-total" id="cartTotal">Total: R0.00</div>
+            <button class="checkout-btn" onclick="sendCartToWhatsApp()"><i class="fab fa-whatsapp"></i> Send Order via WhatsApp</button>
+            <button class="close-cart-btn" onclick="closeCartModal()">Continue Shopping</button>
+        </div>
+    </div>
+ 
+
+<!-- === BEELAL AI CHAT PANEL === -->
+<div class="ai-chat-panel" id="aiChatPanel">
+  <div class="ai-chat-header">
+    <div class="ai-avatar-square">
+      <img src="images-logo/bee.jpg" alt="Ask Beelal AI">
+    </div>
+    <h4>Beelal AI</h4>
+    <button class="ai-close-btn" id="aiCloseBtn">×</button>
+  </div>
+  <div class="ai-chat-messages" id="aiChatMessages">
+    <div class="ai-message bot">
+      Hello! 👋 I'm your <strong>Nothing Fancy</strong> assistant.<br>
+      You can ask me things like:<br>
+      • “What are your opening hours?”<br>
+      • “Where are you located?”<br>
+      • “Do you deliver?”<br>
+      • “Show me kitchen towels under R50”
+    </div>
+  </div>
+  <div class="ai-chat-input">
+    <input type="text" id="aiUserInput" placeholder="e.g. Do you deliver nationwide?">
+    <button id="aiSendBtn"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>BUTCHER BLOCK</h3>
+                    <p>Premium Meat Supplier for Restaurants & Home Chefs</p>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <nav class="footer-nav">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#bulk-sales">Shop</a></li>
+                            <li><a href="javascript:void(0)" onclick="showBusinessModal()">About Us</a></li>
+                            <li><a href="mailto:info@butcherblock.co.za">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; Hive Times. All rights reserved. | Butcher Block Premium Meats
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // === CART ===
+        const cart = {
+            items: [],
+            STORAGE_KEY: 'butcher_block_cart_v1',
+            init() {
+                const stored = localStorage.getItem(this.STORAGE_KEY);
+                if (stored) {
+                    try {
+                        this.items = JSON.parse(stored);
+                    } catch (e) {
+                        this.items = [];
+                    }
+                }
+                this.updateCartDisplay();
+            },
+            saveCart() {
+                localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.items));
+                this.updateCartDisplay();
+            },
+            addToCart(product) {
+                const existing = this.items.find(item => item.id === product.id);
+                if (existing) {
+                    existing.quantity += product.quantity;
+                } else {
+                    this.items.push(product);
+                }
+                this.saveCart();
+            },
+            updateQuantity(id, delta) {
+                const item = this.items.find(i => i.id === id);
+                if (item) {
+                    item.quantity += delta;
+                    if (item.quantity <= 0) {
+                        this.removeItem(id);
+                    } else {
+                        this.saveCart();
+                    }
+                }
+            },
+            removeItem(id) {
+                this.items = this.items.filter(item => item.id !== id);
+                this.saveCart();
+            },
+            calculateTotal() {
+                return this.items.reduce((total, item) => {
+                    // For "Call for Quote" items, don't include in total
+                    if (item.price === 0.00) return total;
+                    return total + (item.price * item.quantity);
+                }, 0).toFixed(2);
+            },
+            updateCartDisplay() {
+                const countEl = document.getElementById('cartCount');
+                const itemsEl = document.querySelector('.cart-items');
+                const totalEl = document.getElementById('cartTotal');
+                const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+                
+                if (countEl) countEl.textContent = totalItems;
+                
+                if (itemsEl) {
+                    if (this.items.length === 0) {
+                        itemsEl.innerHTML = '<p style="text-align: center; color: #555;">Your cart is empty.</p>';
+                    } else {
+                        itemsEl.innerHTML = '';
+                        this.items.forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'cart-item';
+                            
+                            // Format price display
+                            const priceDisplay = item.price === 0.00 
+                                ? 'Call for Quote' 
+                                : `R${(item.price * item.quantity).toFixed(2)} (R${item.price.toFixed(2)} each)`;
+                            
+                            div.innerHTML = `
+                                <img src="${item.image}" alt="${item.name}" class="cart-item-image" style="width:60px;height:60px;object-fit:cover;">
+                                <div class="cart-item-details">
+                                    <div class="cart-item-name">${item.name}</div>
+                                    <div class="cart-item-variant">Business: ${item.businessName}</div>
+                                    <div class="cart-item-price">${priceDisplay}</div>
+                                    <div class="cart-item-quantity">
+                                        <button class="cart-quantity-btn" onclick="cart.updateQuantity('${item.id}', -1)">-</button>
+                                        <span class="cart-quantity-display">${item.quantity}</span>
+                                        <button class="cart-quantity-btn" onclick="cart.updateQuantity('${item.id}', 1)">+</button>
+                                    </div>
+                                </div>
+                                <button class="remove-item-btn" onclick="cart.removeItem('${item.id}')"><i class="fas fa-trash"></i></button>
+                            `;
+                            itemsEl.appendChild(div);
+                        });
+                    }
+                }
+                
+                if (totalEl) {
+                    // Only show total if there are items with prices
+                    const hasPricedItems = this.items.some(item => item.price > 0);
+                    totalEl.textContent = hasPricedItems 
+                        ? `Total: R${this.calculateTotal()}`
+                        : "Total: Call for Quote";
+                }
+            }
+        };
+        
+        // === AI SEARCH SETUP ===
+        const aiProductSearch = {
+            init() {
+                document.getElementById('aiProductSearchInput').addEventListener('input', (e) => {
+                    const query = e.target.value.trim().toLowerCase();
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        let hasVisible = false;
+                        const cards = section.querySelectorAll('.product-card');
+                        cards.forEach(card => {
+                            const name = card.querySelector('.product-name').textContent.toLowerCase();
+                            const category = card.getAttribute('data-category');
+                            const price = parseFloat(card.getAttribute('data-price'));
+                            let show = true;
+                            
+                            if (query) {
+                                // Check for price filters like "under R250"
+                                if (query.includes('under') || query.includes('<')) {
+                                    const match = query.match(/(\d+(\.\d+)?)/);
+                                    if (match) {
+                                        const max = parseFloat(match[0]);
+                                        show = price <= max && price > 0;
+                                    } else {
+                                        show = false;
+                                    }
+                                } 
+                                // Check if query matches product name or category
+                                else {
+                                    show = name.includes(query) || category.includes(query.replace(/\s+/g, '-'));
+                                }
+                            }
+                            
+                            card.style.display = show ? 'block' : 'none';
+                            if (show) hasVisible = true;
+                        });
+                        section.style.display = hasVisible ? 'block' : 'none';
+                    });
+                });
+            }
+        };
+        
+        // === MODALS ===
+        function showBusinessModal() {
+            const overlay = document.getElementById('businessModalOverlay');
+            const modal = document.getElementById('businessModal');
+            overlay.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+        
+        function hideBusinessModal() {
+            const modal = document.getElementById('businessModal');
+            const overlay = document.getElementById('businessModalOverlay');
+            modal.classList.remove('active');
+            setTimeout(() => overlay.style.display = 'none', 700);
+        }
+        
+        document.getElementById('closeBusinessModal').addEventListener('click', hideBusinessModal);
+        document.getElementById('businessModalOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) hideBusinessModal();
+        });
+        
+        // === HAMBURGER MENU ===
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const sideMenu = document.getElementById('sideMenu');
+        
+        function toggleMenu() {
+            hamburgerBtn.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            sideMenu.classList.toggle('active');
+            document.body.style.overflow = sideMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        
+        hamburgerBtn.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+        
+        function toggleSubmenu(id) {
+            const submenu = document.getElementById(id + '-submenu');
+            if (submenu) {
+                submenu.classList.toggle('active');
+                submenu.previousElementSibling.classList.toggle('active');
+            }
+        }
+        
+        function scrollToSection(id) {
+            toggleMenu();
+            setTimeout(() => {
+                const el = document.getElementById(id);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+        
+        // === PRODUCT MODAL ===
+        const allProducts = Array.from(document.querySelectorAll('.product-card')).map(card => ({
+            id: card.getAttribute('data-id'),
+            name: card.querySelector('.product-name').textContent,
+            price: parseFloat(card.getAttribute('data-price')),
+            image: card.querySelector('.product-image').src,
+            description: card.querySelector('.product-description').textContent,
+            thumbnails: [card.querySelector('.product-image').src],
+            variants: []
+        }));
+        
+        function showProductModal(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductPrice').textContent = 
+                product.price === 0.00 ? 'Call for Quote' : `R${product.price.toFixed(2)}`;
+            document.getElementById('modalProductDescription').textContent = product.description;
+            document.getElementById('modalMainImage').src = product.image;
+            document.getElementById('modalQuantity').textContent = 1;
+            
+            // Thumbnails
+            const thumbs = document.getElementById('productThumbnails');
+            thumbs.innerHTML = '';
+            product.thumbnails.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'thumbnail';
+                img.onclick = () => document.getElementById('modalMainImage').src = src;
+                thumbs.appendChild(img);
+            });
+            
+            // Add to cart handler
+            document.getElementById('modalAddToCartBtn').onclick = () => {
+                const qty = parseInt(document.getElementById('modalQuantity').textContent);
+                cart.addToCart({
+                    id: productId,
+                    name: product.name,
+                    price: product.price,
+                    quantity: qty,
+                    image: product.image,
+                    businessName: 'Butcher Block',
+                    businessLogo: 'images-logo/butcherblock-logo.jpg'
+                });
+                closeProductModal();
+            };
+            
+            // Quantity buttons
+            document.getElementById('increaseQuantity').onclick = () => {
+                let q = parseInt(document.getElementById('modalQuantity').textContent);
+                document.getElementById('modalQuantity').textContent = q + 1;
+            };
+            
+            document.getElementById('decreaseQuantity').onclick = () => {
+                let q = parseInt(document.getElementById('modalQuantity').textContent);
+                if (q > 1) document.getElementById('modalQuantity').textContent = q - 1;
+            };
+            
+            document.querySelector('.product-modal-overlay').style.display = 'flex';
+            setTimeout(() => document.querySelector('.product-modal').classList.add('active'), 10);
+        }
+        
+        function closeProductModal() {
+            document.querySelector('.product-modal').classList.remove('active');
+            setTimeout(() => document.querySelector('.product-modal-overlay').style.display = 'none', 300);
+        }
+        
+        document.addEventListener('click', (e) => {
+            const card = e.target.closest('.product-card');
+            if (card && !e.target.closest('.add-to-cart-btn')) {
+                const id = card.getAttribute('data-id');
+                showProductModal(id);
+            }
+        });
+        
+        // === CART MODAL ===
+        function showCartModal() {
+            document.querySelector('.cart-modal-overlay').style.display = 'flex';
+            setTimeout(() => document.querySelector('.cart-modal').classList.add('active'), 10);
+            cart.updateCartDisplay();
+        }
+        
+        function closeCartModal() {
+            document.querySelector('.cart-modal').classList.remove('active');
+            setTimeout(() => document.querySelector('.cart-modal-overlay').style.display = 'none', 300);
+        }
+        
+        // === WHATSAPP ORDER ===
+        function sendCartToWhatsApp() {
+            if (cart.items.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            
+            let msg = "Hi! i am enquiring from Hive Times, I'd like to place an order from Butcher Block:\n";
+            let hasPricedItems = false;
+            
+            cart.items.forEach(item => {
+                if (item.price > 0) {
+                    hasPricedItems = true;
+                    msg += `• ${item.name} x${item.quantity} — R${(item.price * item.quantity).toFixed(2)}\n`;
+                } else {
+                    msg += `• ${item.name} x${item.quantity} — Call for Quote\n`;
+                }
+            });
+            
+            if (hasPricedItems) {
+                msg += `\nTotal: R${cart.calculateTotal()}\n`;
+            } else {
+                msg += `\nTotal: Call for Quote\n`;
+            }
+            
+            msg += "\nThank you!";
+            
+            const url = `https://wa.me/27615023930?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+        
+        // === SLIDER ===
+        fetch('slider.html')
+        .then(res => res.ok ? res.text() : Promise.reject('slider.html not found'))
+        .then(html => {
+            document.getElementById('slider-container').innerHTML = html;
+            new Swiper('.mySwiper', {
+                spaceBetween: 0,
+                centeredSlides: true,
+                autoplay: { delay: 3000, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                loop: true,
+                effect: 'fade',
+                fadeEffect: { crossFade: true }
+            });
+        })
+        .catch(err => {
+            console.error('Slider error:', err);
+            // Fallback slider is already in the HTML
+        });
+        
+        // === INIT ===
+        document.addEventListener('DOMContentLoaded', () => {
+            cart.init();
+            aiProductSearch.init();
+            
+            // Close menus when resizing to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && sideMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+    // === AI CHAT WIDGET LOGIC ===
+document.addEventListener('DOMContentLoaded', () => {
+  const widget = document.getElementById('aiChatWidget');
+  const panel = document.getElementById('aiChatPanel');
+  const closeBtn = document.getElementById('aiCloseBtn');
+  const chatMessages = document.getElementById('aiChatMessages');
+  const userInput = document.getElementById('aiUserInput');
+  const sendBtn = document.getElementById('aiSendBtn');
+
+  widget.addEventListener('click', () => {
+    panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    panel.style.display = 'none';
+  });
+
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addMessage(text, isUser = false) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('ai-message', isUser ? 'user' : 'bot');
+    msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+    chatMessages.appendChild(msgDiv);
+    setTimeout(scrollToBottom, 10);
+  }
+
+  function getResponse(query) {
+    const lower = query.toLowerCase().trim();
+    if (lower.includes('where') || lower.includes('located') || lower.includes('address') || lower.includes('find')) {
+      return "📍 We're located at <strong>239 Norda St, Leslie, Thuli Fakude, 2265</strong>. Visit us during business hours!";
+    }
+    if (lower.includes('contact') || lower.includes('phone') || lower.includes('call') || lower.includes('number')) {
+      return "📞 Call or WhatsApp us at <strong>071 021 8554</strong> for orders or inquiries!";
+    }
+    if (lower.includes('email') || lower.includes('@')) {
+      return "📧 Email us at <strong>contact@nothingfancy.co.za</strong> for wholesale or custom orders!";
+    }
+    if (lower.includes('open') || lower.includes('hour') || lower.includes('time') || lower.includes('close')) {
+      return "🕒 We're open:<br><strong>Monday–Friday: 9:00 AM – 5:30 PM<br>Saturday: 9:00 AM – 3:30 PM<br>Sunday: 9:30 AM – 1:00 PM</strong>";
+    }
+    if (lower.includes('deliver') || lower.includes('shipping') || lower.includes('nationwide') || lower.includes('ship')) {
+      return "🚚 Yes! We offer delivery across Johannesburg. Place your order via WhatsApp or email for a quote!";
+    }
+    if (lower.includes('bulk') || lower.includes('wholesale') || lower.includes('quote') || lower.includes('bale')) {
+      return "💼 We specialize in <strong>bulk toilet paper, kitchen towels, and garage rolls</strong> for retailers, schools, and events. Contact us for custom quotes!";
+    }
+    if (lower.includes('toilet') || lower.includes('kitchen') || lower.includes('garage') || lower.includes('towel') || lower.includes('roll')) {
+      return "🧻 Browse our categories using the menu! We offer premium <strong>2-ply, 1-ply, bales, kitchen towels, garage rolls, and more</strong>. All products are high-quality and competitively priced.";
+    }
+    return "I can help with location, hours, delivery, or product info! Try: “Do you deliver?” or “What are your opening hours?”";
+  }
+
+  function handleSend() {
+    const query = userInput.value.trim();
+    if (!query) return;
+    addMessage(query, true);
+    userInput.value = '';
+    const response = getResponse(query);
+    setTimeout(() => addMessage(response), 400);
+  }
+
+  sendBtn.addEventListener('click', handleSend);
+  userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleSend();
+  });
+});
+    </script>
+    
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</body>
+</html>
