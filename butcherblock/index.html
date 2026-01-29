@@ -2675,23 +2675,28 @@ body {
     </div>
  
 
+<!-- === BEELAL AI CHAT WIDGET BUTTON === -->
+<div class="ai-chat-widget" id="aiChatWidget">
+  <img src="images-butchershop/bee.jpg" alt="Ask Beelal AI">
+</div>
+
 <!-- === BEELAL AI CHAT PANEL === -->
 <div class="ai-chat-panel" id="aiChatPanel">
   <div class="ai-chat-header">
     <div class="ai-avatar-square">
-      <img src="images-logo/bee.jpg" alt="Ask Beelal AI">
+      <img src="images-butchershop/bee.jpg" alt="Beelal AI">
     </div>
-    <h4>Beelal AI</h4>
+    <h4>Beelal</h4>
     <button class="ai-close-btn" id="aiCloseBtn">×</button>
   </div>
   <div class="ai-chat-messages" id="aiChatMessages">
     <div class="ai-message bot">
-      Hello! 👋 I'm your <strong>Nothing Fancy</strong> assistant.<br>
+      Hello! 👋 I'm your <strong>Butcher Block</strong> assistant.<br>
       You can ask me things like:<br>
-      • “What are your opening hours?”<br>
-      • “Where are you located?”<br>
-      • “Do you deliver?”<br>
-      • “Show me kitchen towels under R50”
+      • "What are your opening hours?"<br>
+      • "Where are you located?"<br>
+      • "Do you deliver?"<br>
+      • "Show me beef cuts under R200"
     </div>
   </div>
   <div class="ai-chat-input">
@@ -3145,6 +3150,141 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') handleSend();
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const widget = document.getElementById('aiChatWidget');
+  const panel = document.getElementById('aiChatPanel');
+  const closeBtn = document.getElementById('aiCloseBtn');
+  const chatMessages = document.getElementById('aiChatMessages');
+  const userInput = document.getElementById('aiUserInput');
+  const sendBtn = document.getElementById('aiSendBtn');
+
+  // Toggle chat panel visibility
+  widget.addEventListener('click', () => {
+    panel.classList.toggle('active');
+    if (panel.classList.contains('active')) {
+      userInput.focus();
+    }
+  });
+
+  closeBtn.addEventListener('click', () => {
+    panel.classList.remove('active');
+  });
+
+  // Auto-scroll to bottom of chat
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Add message to chat interface
+  function addMessage(text, isUser = false) {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('ai-message', isUser ? 'user' : 'bot');
+    msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+    chatMessages.appendChild(msgDiv);
+    setTimeout(scrollToBottom, 10);
+  }
+
+  // AI response logic for Butcher Block
+  function getResponse(query) {
+    const lower = query.toLowerCase().trim();
+    
+    // Location query
+    if (lower.includes('where') || lower.includes('located') || lower.includes('location') || lower.includes('address') || lower.includes('find')) {
+      return "📍 We're located at <strong>239 Norda St, Leslie, Thuli Fakude, 2265</strong>. Visit us during business hours!";
+    }
+    
+    // Contact number
+    if (lower.includes('contact') || lower.includes('phone') || lower.includes('number') || lower.includes('call') || lower.includes('whatsapp')) {
+      return "📞 Call or WhatsApp us at <strong>+27 61 502 3930</strong> for orders or inquiries!";
+    }
+    
+    // Email
+    if (lower.includes('email') || lower.includes('@')) {
+      return "📧 Email us at <strong>info@butcherblock.co.za</strong> for wholesale or custom orders!";
+    }
+    
+    // Opening hours
+    if (lower.includes('open') || lower.includes('hour') || lower.includes('time') || lower.includes('close') || lower.includes('operating')) {
+      return "🕒 We're open:<br><strong>Monday–Friday: 6:00 AM – 6:00 PM</strong><br><strong>Saturday: Closed</strong><br><strong>Sunday: Closed</strong>";
+    }
+    
+    // Delivery
+    if (lower.includes('deliver') || lower.includes('shipping') || lower.includes('nationwide') || lower.includes('ship') || lower.includes('delivery')) {
+      return "🚚 Yes! We offer delivery across South Africa. Place your order via WhatsApp or email for a quote!";
+    }
+    
+    // Bulk/wholesale
+    if (lower.includes('bulk') || lower.includes('wholesale') || lower.includes('quote') || lower.includes('carcass') || lower.includes('forequarter') || lower.includes('hindquarter')) {
+      return "💼 We specialize in <strong>bulk meat sales</strong> including whole/half carcasses, forequarters, and hindquarters. Contact us for custom quotes!";
+    }
+    
+    // Beef cuts
+    if (lower.includes('beef') || lower.includes('steak') || lower.includes('ribeye') || lower.includes('fillet') || lower.includes('sirloin') || lower.includes('t-bone') || lower.includes('tomahawk') || lower.includes('rump') || lower.includes('chuck') || lower.includes('brisket') || lower.includes('short rib')) {
+      return "🥩 We offer premium <strong>beef cuts</strong> including Ribeye, Fillet, Sirloin, T-Bone, Tomahawk, Rump, Chuck, Brisket, Short Rib, and more. Browse our Beef Cuts section or ask for specific cuts!";
+    }
+    
+    // Lamb
+    if (lower.includes('lamb') || lower.includes('loin chop') || lower.includes('best end') || lower.includes('leg') || lower.includes('shank') || lower.includes('curry')) {
+      return "🐑 We supply quality <strong>lamb cuts</strong> including Loin Chops, Best End (Rib), Leg Chops, Leg of Lamb, Shank, and Curry Meat. We also offer whole/half lamb carcasses for bulk orders!";
+    }
+    
+    // Chicken
+    if (lower.includes('chicken') || lower.includes('skin on') || lower.includes('skin off') || lower.includes('drumstick') || lower.includes('thigh') || lower.includes('fillet') || lower.includes('leg quarter')) {
+      return "🐔 We offer both <strong>skin-on and skin-off chicken</strong> options including whole birds, 12-piece packs, drumsticks, thighs, leg quarters, and fillets. Perfect for all your cooking needs!";
+    }
+    
+    // Processed meat
+    if (lower.includes('processed') || lower.includes('mince') || lower.includes('boerewors') || lower.includes('braaiwors') || lower.includes('meatball') || lower.includes('pattie') || lower.includes('sausage')) {
+      return "🍖 Our <strong>processed meat</strong> selection includes Mince, Boerewors, Braaiwors, Meat Balls, and Patties. All made with premium quality meat!";
+    }
+    
+    // Hampers
+    if (lower.includes('hamper') || lower.includes('gift') || lower.includes('package') || lower.includes('assorted')) {
+      return "🎁 We offer <strong>meat hampers</strong> with assorted cuts perfect for gifts, events, or family gatherings. Contact us for custom hamper options!";
+    }
+    
+    // Oxtail & specialty
+    if (lower.includes('oxtail') || lower.includes('tongue') || lower.includes('tripe') || lower.includes('trotter') || lower.includes('specialty')) {
+      return "🦴 We stock <strong>specialty cuts</strong> including Oxtail, Tongue, Tripe, and Trotters. Great for traditional dishes and stews!";
+    }
+    
+    // Default fallback
+    return "I can help with location, hours, delivery, or product info! Try: \"Do you deliver?\" or \"What beef cuts do you have?\" or \"Show me lamb under R250\"";
+  }
+
+  // Handle message sending
+  function handleSend() {
+    const query = userInput.value.trim();
+    if (!query) return;
+    
+    addMessage(query, true);
+    userInput.value = '';
+    
+    // Show typing indicator briefly
+    setTimeout(() => {
+      const response = getResponse(query);
+      addMessage(response);
+    }, 600);
+  }
+
+  // Event listeners
+  sendBtn.addEventListener('click', handleSend);
+  userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleSend();
+  });
+
+  // Close panel when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth < 768 && 
+        panel.classList.contains('active') && 
+        !panel.contains(e.target) && 
+        !widget.contains(e.target)) {
+      panel.classList.remove('active');
+    }
+  });
+});
+
     </script>
     
     <!-- Swiper JS -->
