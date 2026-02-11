@@ -2078,22 +2078,12 @@ body {
                             <span><i class="fas fa-box"></i> Processed Meat</span>
                         </a>
                     </div>
-                    <div class="menu-item">
-                        <div class="menu-link" onclick="toggleSubmenu('whole-primal-cuts')">
+                      <div class="menu-item">
+                        <a href="#whole-primal-cuts" class="menu-link" onclick="scrollToSection('whole-primal-cuts')">
                             <span><i class="fas fa-box"></i> Whole Primal Cuts</span>
-                            <i class="fas fa-chevron-down arrow"></i>
-                        </div>
-                        <div class="submenu" id="whole-primal-cuts-submenu">
-                            <a href="#neck" class="submenu-item" onclick="scrollToSection('neck')">Neck</a>
-                            <a href="#chuck" class="submenu-item" onclick="scrollToSection('chuck')">Chuck</a>
-                            <a href="#cube-rolls" class="submenu-item" onclick="scrollToSection('cube-rolls')">Cube Rolls</a>
-                            <a href="#striploin" class="submenu-item" onclick="scrollToSection('striploin')">Striploin</a>
-                            <a href="#whole-fillet" class="submenu-item" onclick="scrollToSection('whole-fillet')">Whole Fillet</a>
-                            <a href="#rump" class="submenu-item" onclick="scrollToSection('rump')">Rump</a>
-                            <a href="#topside" class="submenu-item" onclick="scrollToSection('topside')">Topside</a>
-                            <a href="#silverside" class="submenu-item" onclick="scrollToSection('silverside')">Silverside</a>
-                        </div>
+                        </a>
                     </div>
+                   
                     <div class="menu-item">
                         <a href="#hampers" class="menu-link" onclick="scrollToSection('hampers')">
                             <span><i class="fas fa-gift"></i> Hampers</span>
@@ -2429,166 +2419,138 @@ body {
             </div>
         </div>
     </div>
-
-    <div class="content-section">
-        <h1 id="" class="section-title">WHOLE PRIMAL CUTS</h1>
-        <h2 id="neck" class="section-title">NECK</h2>
-        <div class="products-grid" id="processedMeatProductsGrid">
-            <div class="product-card" data-id="processed-mince" data-category="neck" data-price="0.00">
-                <img src="images-butchershop/wholeprimalcuts-neck.jpg" alt="Mince" class="product-image">
+ <div class="content-section">
+        <h1 id="whole-primal-cuts" class="section-title"> WHOLE PRIMAL CUT</h1>
+        <div class="products-grid" id="premiumSteaksProductsGrid">
+            <div class="product-card" data-id="neck" data-category="whole-primal-cut" data-price="0.00">
+                <img src="images-butchershop/wholeprimalcuts-neck.jpg" alt="Neck" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Neck</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">Includes the strip loin and tenderloin connected by a T-shaped bone.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'processed-mince', name: 'Neck', price: 0.00, quantity: 1, image: 'images-butchershop/processed-mince.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'neck', name: 'Neck', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-neck.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-           
-         <div class="content-section">
-        <h2 id="processed-meat" class="section-title">CHUCK</h2>
-        <div class="products-grid" id="processedMeatProductsGrid">
-            <div class="product-card" data-id="chuck" data-category="chuck" data-price="0.00">
-                <img src="images-butchershop/wholeprimalcuts-chucktop.jpg" alt="Chuck" class="product-image">
+            <div class="product-card" data-id="chuck-top" data-category="whole-primal-cut" data-price="0.00">
+                <img src="images-butchershop/wholeprimalcuts-chucktop.jpg" alt="Chuck Top" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Chuck Top</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">Versatile and flavorful cut from the rear back portion.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chuck', name: 'Chuck', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-chucktop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chuck-top', name: 'Chuck Top', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-chucktop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card" data-id="chuck-bottom" data-category="chuck" data-price="0.00">
+            <div class="product-card" data-id="chuck-bottom" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-chuckbottom.jpg" alt="Chuck Bottom" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Chuck Bottom</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">Known for its rich marbling and flavor, from the rib section.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chuck-bottom', name: 'Chuck Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/processed-chuck-bottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'chuck-bottom', name: 'Chuck Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-chuckbottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
-     <div class="content-section">
-        <h2 id="cube-roll" class="section-title">CUBE Roll</h2>
-        <div class="products-grid" id="lambCutsProductsGrid">
-            <div class="product-card" data-id="cube-roll" data-category="cube-roll" data-price="0.00">
+            <div class="product-card" data-id="cube-rolls" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-cuberoll.jpg" alt="Cube Roll" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Cube Roll</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">The most tender cut, also known as Tenderloin or Filet Mignon.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'cube-roll', name: 'Cube Roll', price: 0.00, quantity: 1, image: 'images-butchershop/lamb-cube-roll.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'cube-rolls', name: 'Cube Rolls', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-cuberoll.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
-              <div class="content-section">
-        <h2 id="processed-meat" class="section-title">STRIPLOIN</h2>
-        <div class="products-grid" id="processedMeatProductsGrid">
-            <div class="product-card" data-id="striploin-top" data-category="striploin-top" data-price="0.00">
+            <div class="product-card" data-id="striploin-top" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-striplointop.jpg" alt="Striploin Top" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Striploin Top</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">Ribeye cut with the full rib bone left intact.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'striploin-top', name: 'Striploin Top', price: 0.00, quantity: 1, image: 'images-butchershop/processed-striploin-top.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'striploin-top', name: 'Striploin Top', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-striplointop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card" data-id="striploin-bottom" data-category="striploin-bottom" data-price="0.00">
+            <div class="product-card" data-id="striploin-bottom" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-striploinbottom.jpg" alt="Striploin Bottom" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Striploin Bottom</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">A flavorful steak cut from the back end of the cow.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'striploin-bottom', name: 'Striploin Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/processed-striploin-bottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'striploin-bottom', name: 'Striploin Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-striploinbottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
-<div class="content-section">
-        <h2 id="whole-fillet" class="section-title">WHOLE FILLET</h2>
-        <div class="products-grid" id="carcassProductsGrid">
-            <div class="product-card" data-id="whole-fillet" data-category="whole-fillet" data-price="0.00">
+            <div class="product-card" data-id="whole-fillet" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-wholefillet.jpg" alt="Whole Fillet" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Whole Fillet</div>
-                    <div class="product-description"></div>
-                    <div class="product-price">Call for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'whole-fillet', name: 'Whole Fillet', price: 0.00, quantity: 1, image: 'images-butchershop/lamb-whole-fillet.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <div class="product-description">Versatile and flavorful cut from the rear back portion.</div>
+                    <div class="product-price">Ask for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'whole-fillet', name: 'Whole Fillet', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-wholefillet.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
-              <div class="content-section">
-        <h2 id="rump" class="section-title">RUMP</h2>
-        <div class="products-grid" id="processedMeatProductsGrid">
-            <div class="product-card" data-id="rump-top" data-category="rump-top" data-price="0.00">
+            <div class="product-card" data-id="rump-top" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-rumptop.jpg" alt="Rump Top" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Rump Top</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">Known for its rich marbling and flavor, from the rib section.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'rump-top', name: 'Rump Top', price: 0.00, quantity: 1, image: 'images-butchershop/processed-rump-top.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'rump-top', name: 'Rump Top', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-rumptop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card" data-id="rump-bottom" data-category="rump-bottom" data-price="0.00">
+            <div class="product-card" data-id="rump-bottom" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-rumpbottom.jpg" alt="Rump Bottom" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Rump Bottom</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">The most tender cut, also known as Tenderloin or Filet Mignon.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'rump-bottom', name: 'Rump Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/processed-rump-bottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'rump-bottom', name: 'Rump Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-rumpbottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
-                  <div class="content-section">
-        <h2 id="topside" class="section-title">TOPSIDE</h2>
-        <div class="products-grid" id="processedMeatProductsGrid">
-            <div class="product-card" data-id="topside-top" data-category="topside-top" data-price="0.00">
-                <img src="images-butchershop/wholeprimalcuts-topside.jpg" alt="topside-top" class="product-image">
+            <div class="product-card" data-id="topside-top" data-category="whole-primal-cut" data-price="0.00">
+                <img src="images-butchershop/wholeprimalcuts-topside.jpg" alt="Topside Top" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Topside Top</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">The most tender cut, also known as Tenderloin or Filet Mignon.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'topside-top', name: 'Topside Top', price: 0.00, quantity: 1, image: 'images-butchershop/processed-topside-top.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'topside-top', name: 'Topside Top', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-topside.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card" data-id="topside-bottom" data-category="topside-bottom" data-price="0.00">
+            <div class="product-card" data-id="topside-bottom" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-topsidestandardbottom.jpg" alt="Topside Bottom" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Topside Bottom</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">A flavorful steak cut from the back end of the cow.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'topside-bottom', name: 'Topside Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/processed-topside-bottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'topside-bottom', name: 'Topside Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-topsidestandardbottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-            <div class="product-card" data-id="topside-defatted" data-category="topside-defatted" data-price="0.00">
+            <div class="product-card" data-id="topside-defatted" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-topsidedefatted.jpg" alt="Topside Defatted" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Topside Defatted</div>
-                    <div class="product-description">Lean and flavorful cuts from the topside area of lamb, with fat removed.</div>
+                    <div class="product-description">The most tender cut, also known as Tenderloin or Filet Mignon.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'topside-defatted', name: 'Topside Defatted', price: 0.00, quantity: 1, image: 'images-butchershop/processed-topside-defatted.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'topside-defatted', name: 'Topside Defatted', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-topsidedefatted.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
-            <div class="content-section">
-        <h2 id="silverside" class="section-title">SILVERSIDE</h2>
-        <div class="products-grid" id="processedMeatProductsGrid">
-            <div class="product-card" data-id="silverside-top" data-category="silverside-top" data-price="0.00">
-                <img src="images-butchershop/wholeprimalcuts-silversidetop.jpg" alt="silverside-top" class="product-image">
-                <div class="product-info">
-                    <div class="product-name">Silverside Top</div>
-                    <div class="product-description"></div>
-                    <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'silverside-top', name: 'Silverside Top', price: 0.00, quantity: 1, image: 'images-butchershop/processed-silverside-top.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
-                </div>
-            </div>
-            <div class="product-card" data-id="silverside-bottom" data-category="silverside-bottom" data-price="0.00">
+            <div class="product-card" data-id="silverside-bottom" data-category="whole-primal-cut" data-price="0.00">
                 <img src="images-butchershop/wholeprimalcuts-silversidebottom.jpg" alt="Silverside Bottom" class="product-image">
                 <div class="product-info">
                     <div class="product-name">Silverside Bottom</div>
-                    <div class="product-description"></div>
+                    <div class="product-description">Ribeye cut with the full rib bone left intact.</div>
                     <div class="product-price">Ask for Quote</div>
-                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'silverside-bottom', name: 'Silverside Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/processed-silverside-bottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'silverside-bottom', name: 'Silverside Bottom', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-silversidebottom.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
                 </div>
             </div>
-
+            <div class="product-card" data-id="silverside-top" data-category="whole-primal-cut" data-price="0.00">
+                <img src="images-butchershop/wholeprimalcuts-silversidetop.jpg" alt="Silverside Top" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Silverside Top</div>
+                    <div class="product-description">A flavorful steak cut from the back end of the cow.</div>
+                    <div class="product-price">Ask for Quote</div>
+                    <button class="add-to-cart-btn" onclick="cart.addToCart({ id: 'silverside-top', name: 'Silverside Top', price: 0.00, quantity: 1, image: 'images-butchershop/wholeprimalcuts-silversidetop.jpg', businessName: 'Butcher Block', businessLogo: 'images-logo/butcherblock-logo.jpg' })">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="content-section">
         <h2 id="whole-half" class="section-title">WHOLE / HALF LAMB</h2>
         <div class="products-grid" id="carcassProductsGrid">
