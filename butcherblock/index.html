@@ -2514,9 +2514,9 @@
     </div>
 </nav>
 
-<!-- Hero Swiper Slider -->
-<div id="slider-container"></div>
-
+<!-- Slider Container -->
+    <div id="slider-container">
+       
 <!-- Search & Filter Bar -->
 <div class="search-filter-bar" id="searchFilterBar">
     <div class="search-filter-container">
@@ -3567,23 +3567,39 @@ document.addEventListener('DOMContentLoaded', () => {
 });
     });
     
-  // === SLIDER ===
-fetch('slider.html').then(res => res.ok ? res.text() : Promise.reject('slider.html not found'))
-.then(html => {
-    document.getElementById('slider-container').innerHTML = html;
-    if (typeof Swiper !== 'undefined') {
-        new Swiper('.mySwiper', {
-            spaceBetween: 0, centeredSlides: true,
-            autoplay: { delay: 3000, disableOnInteraction: false },
-            pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-            loop: true, effect: 'fade', fadeEffect: { crossFade: true }
+ // === SLIDER ===
+        fetch('slider.html')
+        .then(res => res.ok ? res.text() : Promise.reject('slider.html not found'))
+        .then(html => {
+            document.getElementById('slider-container').innerHTML = html;
+            new Swiper('.mySwiper', {
+                spaceBetween: 0,
+                centeredSlides: true,
+                autoplay: { delay: 3000, disableOnInteraction: false },
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                loop: true,
+                effect: 'fade',
+                fadeEffect: { crossFade: true }
+            });
+        })
+        .catch(err => {
+            console.error('Slider error:', err);
+            // Fallback slider is already in the HTML
         });
-    }
-}).catch(err => {
-    console.error('Slider error:', err);
-    document.getElementById('slider-container').innerHTML = `<div style="text-align:center;padding:40px;color:#228B22;">⚠️ Slider unavailable</div>`;
-});
+        
+        // === INIT ===
+        document.addEventListener('DOMContentLoaded', () => {
+            cart.init();
+            aiProductSearch.init();
+            
+            // Close menus when resizing to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768 && sideMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
 });
 
 // ========== 🚀 DYNAMIC PRODUCT SCHEMA GENERATION ==========
