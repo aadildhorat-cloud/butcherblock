@@ -2398,6 +2398,16 @@ margin: 0 auto;                      /* Ensures perfect horizontal centering */
 top: 1rem !important;
 right: 1rem !important;
 }
+/* === TOAST NOTIFICATION ANIMATIONS === */
+@keyframes slideInRight {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
 </style>
 </head>
 <body>
@@ -2431,10 +2441,8 @@ right: 1rem !important;
 </a>
 <!-- END HIVE TIMES BADGE -->
 <div class="header-actions">
-<button class="cart-btn" onclick="cart.toggleCart()" aria-label="Shopping cart">
-<i class="fas fa-shopping-cart" aria-hidden="true"></i>
-<span class="cart-text">Cart</span>
-<span class="cart-count" id="cartCount" aria-live="polite">0</span>
+<button class="cart-btn" onclick="showCartModal()">
+    <i class="fas fa-shopping-cart"></i> Cart (<span id="cartCount">0</span>)
 </button>
 </div>
 </div>
@@ -2687,6 +2695,11 @@ WhatsApp
 <p>Your cart is empty</p>
 </div>
 </div>
+<div class="cart-items">
+    <!-- The JS will automatically populate items here -->
+    <p style="text-align: center; color: #555;">Your cart is empty.</p>
+</div>
+<div id="cartTotal">Total: R0.00</div>
 <div class="cart-footer">
 <div class="cart-total">
 <span>Total:</span>
@@ -3252,6 +3265,10 @@ cart.addToCart(product, 1);
 }
 }
 // ===== CART SYSTEM =====
+// Links the new button text to your existing sliding cart system
+function showCartModal() {
+    cart.toggleCart();
+}
 const cart = {
 items: [],
 addToCart(product, quantity = 1) {
@@ -3650,6 +3667,274 @@ document.addEventListener('DOMContentLoaded', () => {
 if (window.BUTCHER_BLOCK_PRODUCTS && window.BUTCHER_BLOCK_PRODUCTS.length > 0) {
 setTimeout(generateProductSchema, 500);
 }
+
+// ==========================================
+// BUTCHER BLOCK - CART & TOAST SYSTEM
+// ==========================================
+
+const CART_KEY = 'butcherblock_cart_v1';
+const cart = {
+    items: [],
+    init() {
+        const stored = localStorage.getItem(CART_KEY);
+        if (stored) { 
+            try { this.items = JSON.parse(stored); } catch (e) { this.items = []; } 
+        }
+        this.updateCartDisplay();
+    },
+    saveCart() { 
+        localStorage.setItem(CART_KEY, JSON.stringify(this.items)); 
+        this.updateCartDisplay(); 
+    },
+    addToCart(product) {
+        const existing = this.items.find(item => item.id === product.id);
+        if (existing) { 
+            existing.quantity += product.quantity; 
+        } else { 
+            this.items.push({ ...product }); 
+        }
+        this.saveCart();
+    },
+    updateQuantity(id, delta) {
+        const item = this.items.find(i => i.id === id);
+        if (item) {
+            item.quantity += delta;
+            if (item.quantity <= 0) { this.removeItem(id); }
+            else { this.saveCart(); }
+        }
+    },
+    removeItem(id) { 
+        this.items = this.items.filter(item => item.id !== id); 
+        this.saveCart(); 
+    },
+    calculateTotal() { 
+        return this.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2); 
+    },
+    updateCartDisplay() {
+        // 1. Update Cart Count in Header
+        const countEl = document.getElementById('cartCount');
+        const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+        if (countEl) countEl.textContent = totalItems;
+
+        // 2. Update Cart Modal Items
+        const itemsEl = document.querySelector('.cart-items');
+        const totalEl = document.getElementById('cartTotal');
+        
+        if (itemsEl) {
+            if (this.items.length === 0) { 
+                itemsEl.innerHTML = '<p style="text-align: center; color: #555; padding: 20px;">Your cart is empty.</p>'; 
+            } else {
+                itemsEl.innerHTML = '';
+                this.items.forEach(item => {
+                    const div = document.createElement('div'); 
+                    div.className = 'cart-item';
+                    div.style.cssText = 'display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee;';
+                    div.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; margin-right: 15px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 5px; color: #333;">${item.name}</div>
+                            <div style="color: #c0392b; font-weight: 600;">R${(item.price * item.quantity).toFixed(2)}</div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+                                <button onclick="cart.updateQuantity('${item.id}', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; background: #f9f9f9; cursor: pointer; border-radius: 4px;">-</button>
+                                <span style="font-weight: 600; min-width: 20px; text-align: center;">${item.quantity}</span>
+                                <button onclick="cart.updateQuantity('${item.id}', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; background: #f9f9f9; cursor: pointer; border-radius: 4px;">+</button>
+                                <button onclick="cart.removeItem('${item.id}')" style="margin-left: auto; background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;"><i class="fas fa-trash"></i> Remove</button>
+                            </div>
+                        </div>
+                    `;
+                    itemsEl.appendChild(div);
+                });
+            }
+        }
+        if (totalEl) totalEl.textContent = `Total: R${this.calculateTotal()}`;
+    }
+};
+
+// === TOAST NOTIFICATION ===
+function showToast(message) {
+    const existing = document.querySelector('.toast-notification');
+    if (existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.style.cssText = `
+        position: fixed; bottom: 100px; right: 20px;
+        background: linear-gradient(135deg, #c0392b, #e74c3c); /* Premium Butchery Red Theme */
+        color: white; padding: 14px 24px; border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+        z-index: 3000; font-weight: 500; font-size: 14px;
+        animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.2s forwards;
+        display: flex; align-items: center; gap: 8px; max-width: 300px;
+    `;
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.remove(), 2500);
+}
+
+// === HANDLE "ADD TO CART" CLICKS ===
+document.addEventListener('click', (e) => {
+    // Look for clicks on the Add to Cart button
+    if (e.target.closest('.add-to-cart-btn')) {
+        e.preventDefault();
+        const btn = e.target.closest('.add-to-cart-btn');
+        const card = btn.closest('.product-card'); 
+        
+        // Extract product details from the card or data attributes
+        const product = {
+            id: card?.dataset.id || btn.dataset.productId || Date.now().toString(),
+            name: card?.dataset.name || card?.querySelector('.product-name')?.textContent || 'Premium Meat Cut',
+            price: parseFloat(card?.dataset.price || btn.dataset.price) || 0,
+            image: card?.dataset.image || card?.querySelector('img')?.src || 'images/placeholder.jpg',
+            quantity: 1,
+            businessName: 'Butcher Block'
+        };
+        
+        // Add to cart and trigger the popup
+        cart.addToCart(product);
+        showToast(`✅ ${product.name} added to cart!`);
+    }
+});
+
+// Initialize cart on page load
+document.addEventListener('DOMContentLoaded', () => {
+    cart.init();
+  
+// ==========================================
+// BUTCHER BLOCK - CART & TOAST SYSTEM
+// ==========================================
+
+const CART_KEY = 'butcherblock_cart_v1';
+const cart = {
+    items: [],
+    init() {
+        const stored = localStorage.getItem(CART_KEY);
+        if (stored) { 
+            try { this.items = JSON.parse(stored); } catch (e) { this.items = []; } 
+        }
+        this.updateCartDisplay();
+    },
+    saveCart() { 
+        localStorage.setItem(CART_KEY, JSON.stringify(this.items)); 
+        this.updateCartDisplay(); 
+    },
+    addToCart(product) {
+        const existing = this.items.find(item => item.id === product.id);
+        if (existing) { 
+            existing.quantity += product.quantity; 
+        } else { 
+            this.items.push({ ...product }); 
+        }
+        this.saveCart();
+    },
+    updateQuantity(id, delta) {
+        const item = this.items.find(i => i.id === id);
+        if (item) {
+            item.quantity += delta;
+            if (item.quantity <= 0) { this.removeItem(id); }
+            else { this.saveCart(); }
+        }
+    },
+    removeItem(id) { 
+        this.items = this.items.filter(item => item.id !== id); 
+        this.saveCart(); 
+    },
+    calculateTotal() { 
+        return this.items.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2); 
+    },
+    updateCartDisplay() {
+        // 1. Update Cart Count in Header
+        const countEl = document.getElementById('cartCount');
+        const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+        if (countEl) countEl.textContent = totalItems;
+
+        // 2. Update Cart Modal Items
+        const itemsEl = document.querySelector('.cart-items');
+        const totalEl = document.getElementById('cartTotal');
+        
+        if (itemsEl) {
+            if (this.items.length === 0) { 
+                itemsEl.innerHTML = '<p style="text-align: center; color: #555; padding: 20px;">Your cart is empty.</p>'; 
+            } else {
+                itemsEl.innerHTML = '';
+                this.items.forEach(item => {
+                    const div = document.createElement('div'); 
+                    div.className = 'cart-item';
+                    div.style.cssText = 'display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid #eee;';
+                    div.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: cover; border-radius: 8px; margin-right: 15px;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; margin-bottom: 5px; color: #333;">${item.name}</div>
+                            <div style="color: #c0392b; font-weight: 600;">R${(item.price * item.quantity).toFixed(2)}</div>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px;">
+                                <button onclick="cart.updateQuantity('${item.id}', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; background: #f9f9f9; cursor: pointer; border-radius: 4px;">-</button>
+                                <span style="font-weight: 600; min-width: 20px; text-align: center;">${item.quantity}</span>
+                                <button onclick="cart.updateQuantity('${item.id}', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; background: #f9f9f9; cursor: pointer; border-radius: 4px;">+</button>
+                                <button onclick="cart.removeItem('${item.id}')" style="margin-left: auto; background: #e74c3c; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 12px;"><i class="fas fa-trash"></i> Remove</button>
+                            </div>
+                        </div>
+                    `;
+                    itemsEl.appendChild(div);
+                });
+            }
+        }
+        if (totalEl) totalEl.textContent = `Total: R${this.calculateTotal()}`;
+    }
+};
+
+// === TOAST NOTIFICATION ===
+function showToast(message) {
+    const existing = document.querySelector('.toast-notification');
+    if (existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.style.cssText = `
+        position: fixed; bottom: 100px; right: 20px;
+        background: linear-gradient(135deg, #c0392b, #e74c3c); /* Premium Butchery Red Theme */
+        color: white; padding: 14px 24px; border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+        z-index: 3000; font-weight: 500; font-size: 14px;
+        animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.2s forwards;
+        display: flex; align-items: center; gap: 8px; max-width: 300px;
+    `;
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.remove(), 2500);
+}
+
+// === HANDLE "ADD TO CART" CLICKS ===
+document.addEventListener('click', (e) => {
+    // Look for clicks on the Add to Cart button
+    if (e.target.closest('.add-to-cart-btn')) {
+        e.preventDefault();
+        const btn = e.target.closest('.add-to-cart-btn');
+        const card = btn.closest('.product-card'); 
+        
+        // Extract product details from the card or data attributes
+        const product = {
+            id: card?.dataset.id || btn.dataset.productId || Date.now().toString(),
+            name: card?.dataset.name || card?.querySelector('.product-name')?.textContent || 'Premium Meat Cut',
+            price: parseFloat(card?.dataset.price || btn.dataset.price) || 0,
+            image: card?.dataset.image || card?.querySelector('img')?.src || 'images/placeholder.jpg',
+            quantity: 1,
+            businessName: 'Butcher Block'
+        };
+        
+        // Add to cart and trigger the popup
+        cart.addToCart(product);
+        showToast(`✅ ${product.name} added to cart!`);
+    }
+});
+
+// Initialize cart on page load
+document.addEventListener('DOMContentLoaded', () => {
+    cart.init();
+});
+
+});
+
 });
 });
 </script>
