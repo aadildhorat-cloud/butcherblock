@@ -76,6 +76,8 @@
 <link rel="preconnect" href="https://script.google.com">
 <link rel="dns-prefetch" href="https://script.google.com">
 <link rel="dns-prefetch" href="https://wa.me">
+<!-- 🚀 SPEED: start fetching the products script in parallel with HTML parsing -->
+<link rel="preload" href="js/products-butcherblock.js" as="script">
 <!-- 🔗 Favicon -->
 <link rel="icon" type="image/png" href="images/butcherblock-logo.jpg">
 <link rel="apple-touch-icon" href="images/butcherblock-logo.jpg">
@@ -2399,6 +2401,9 @@ right: 1rem !important;
 </style>
 </head>
 <body>
+<!-- ⚡ INSTANT PRODUCTS: Google Apps Script injects the live product JSON here on every sync,
+     so the catalog is already in the page — no fetch, no localStorage wait, no flash of "loading". -->
+<script>window.BB_INLINE_PRODUCTS=__BB_PRODUCTS_PLACEHOLDER__;window.BB_INLINE_PRODUCTS_HASH="__BB_PRODUCTS_HASH_PLACEHOLDER__";</script>
 <header id="mainHeader">
 <div class="header-container">
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="sideMenu">

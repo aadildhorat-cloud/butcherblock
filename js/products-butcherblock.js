@@ -80,6 +80,7 @@ let PRODUCTS = [];
 let PRODUCTS_MAP = new Map(); // O(1) lookup
 let isLoading = false;
 let loadError = null;
+let lastRawSnapshot = null; // used by backgroundRefresh to detect real changes
 
 // ⚡ localStorage cache helpers
 function getCachedProducts() {
@@ -164,24 +165,35 @@ async function fetchProducts(forceRefresh = false) {
     return PRODUCTS;
 }
 
-// Background refresh
-async function backgroundRefresh() {
+// Background refresh — silent, non-blocking, only touches the UI if data actually changed
+async function backgroundRefresh(knownHash) {
+    // Check placeholder URL — nothing to refresh against
+    if (!CONFIG.SHEETS_API_URL || CONFIG.SHEETS_API_URL.indexOf("YOUR_DEPLOYMENT_ID") !== -1) return;
+
     try {
         // ✅ FIX: Add &format=json here as well
         const url = CONFIG.SHEETS_API_URL + (CONFIG.SHEETS_API_URL.includes('?') ? '&' : '?') + 't=' + Date.now() + '&bg=1&format=json';
         const response = await fetch(url, { cache: 'no-cache' });
         const data = await response.json();
-        
+
         // ✅ FIX: Extract the array from the object
         const productsArray = Array.isArray(data) ? data : (data.products || []);
-        
-        if (productsArray && productsArray.length >= 0) {
-            processProducts(productsArray);
-            setCachedProducts(productsArray);
-            console.log('🔄 Background refresh complete');
-            if (document.getElementById('dynamicCategoriesContainer')) {
-                if (typeof window.renderDynamicCategories === 'function') window.renderDynamicCategories();
-            }
+        if (!productsArray) return;
+
+        const snapshot = JSON.stringify(productsArray);
+        if (lastRawSnapshot === null) lastRawSnapshot = JSON.stringify(window.BB_INLINE_PRODUCTS || []);
+
+        if (snapshot === lastRawSnapshot) {
+            console.log('🔄 Background refresh: no changes since last sync');
+            return;
+        }
+
+        lastRawSnapshot = snapshot;
+        processProducts(productsArray);
+        setCachedProducts(productsArray);
+        console.log('🔄 Background refresh: newer product data found, updated silently');
+        if (document.getElementById('dynamicCategoriesContainer')) {
+            if (typeof window.renderDynamicCategories === 'function') window.renderDynamicCategories();
         }
     } catch (error) {}
 }
@@ -386,16 +398,39 @@ window.BBCart = Cart;
 // 🚀 INITIALIZATION
 (async function init() {
     Cart.init();
-    await fetchProducts();
-    
+
+    // ⚡⚡⚡ INSTANT PATH: index.html now injects the live product JSON inline
+    // (window.BB_INLINE_PRODUCTS), written directly into the page by the Apps
+    // Script sync. That means product data is available the instant this
+    // script runs — zero fetch, zero localStorage read, zero waiting.
+    const hasInlineData = Array.isArray(window.BB_INLINE_PRODUCTS) && window.BB_INLINE_PRODUCTS.length > 0;
+
+    if (hasInlineData) {
+        processProducts(window.BB_INLINE_PRODUCTS);
+        setCachedProducts(window.BB_INLINE_PRODUCTS);
+        isLoading = false;
+        console.log(`⚡ ${PRODUCTS.length} products loaded instantly from inline data (0 network requests)`);
+
+        try {
+            document.dispatchEvent(new CustomEvent('bb:products:loaded', { detail: { products: PRODUCTS } }));
+        } catch (err) {}
+
+        // 🔄 Quiet background check for anything edited since the last sync
+        // (auto-sync runs every 5 min, so this closes that gap). Never blocks
+        // the UI and only re-renders if the data actually changed.
+        setTimeout(() => backgroundRefresh(window.BB_INLINE_PRODUCTS_HASH), 1500);
+    } else {
+        // Fallback path (e.g. local testing without the Apps Script injection step)
+        await fetchProducts();
+        try {
+            document.dispatchEvent(new CustomEvent('bb:products:loaded', { detail: { products: PRODUCTS } }));
+        } catch (err) {}
+    }
+
     console.group('🥩 Butcher Block Products Initialized');
     console.log(`✅ ${PRODUCTS.length} products ready`);
     console.log(`🛒 Cart: ${Cart.getCount()} items`);
     console.groupEnd();
-    
-    try {
-        document.dispatchEvent(new CustomEvent('bb:products:loaded', { detail: { products: PRODUCTS } }));
-    } catch(err) {}
 })();
 
 // ========== 🚀 DYNAMIC PRODUCT SCHEMA GENERATION (SEO) ==========
