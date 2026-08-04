@@ -2407,10 +2407,720 @@ right: 1rem !important;
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(-10px); }
 }
+/* ===== MOBILE ONLY: SMALLER CART & HIVE BADGE ===== */
+@media (max-width: 768px) {
+    /* --- Smaller Cart Button --- */
+    .cart-btn {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.8rem !important;
+        min-height: 36px !important;
+        gap: 0.25rem !important;
+    }
+    .cart-btn i { font-size: 0.85em !important; }
+    .cart-count {
+        padding: 0.1rem 0.4rem !important;
+        font-size: 0.7rem !important;
+    }
 
+    /* --- Smaller Hive Member Badge (Overrides inline styles) --- */
+    .hive-badge-link {
+        padding: 3px 8px !important;
+        border: 1.5px solid #E5C100 !important;
+    }
+    .hive-badge-link svg {
+        width: 12px !important;
+        height: 12px !important;
+        margin-right: 4px !important;
+    }
+    .hive-badge-link div {
+        line-height: 1 !important;
+    }
+    .hive-badge-link span:first-child {
+        font-size: 10px !important;
+        letter-spacing: 0.3px !important;
+    }
+    .hive-badge-link span:last-child {
+        font-size: 7px !important;
+    }
+}
+/* =====================================================
+   BB ADVANCED PRELOADER
+===================================================== */
+html.bb-preloading,
+html.bb-preloading body {
+  overflow: hidden !important;
+}
+
+#bb-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(209, 49, 4, 0.22), transparent 28%),
+    radial-gradient(circle at 80% 75%, rgba(251, 191, 36, 0.10), transparent 22%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #2a0f0a 100%);
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+#bb-preloader.bb-preloader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bb-preloader-card {
+  width: min(420px, 100%);
+  text-align: center;
+  position: relative;
+}
+
+.bb-preloader-logo {
+  width: 132px;
+  height: 132px;
+  margin: 0 auto 18px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  animation: bbPreloaderFloat 2.8s ease-in-out infinite;
+}
+
+.bb-preloader-logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.bb-preloader-logo::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 36px;
+  border: 2px solid transparent;
+  border-top-color: var(--primary-red);
+  border-right-color: rgba(209, 49, 4, 0.55);
+  animation: bbPreloaderSpin 1.05s linear infinite;
+}
+
+.bb-preloader-logo::after {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  border-radius: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: bbPreloaderPulse 2s ease-out infinite;
+}
+
+.bb-preloader-title {
+  color: #ffffff;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.bb-preloader-title span {
+  color: var(--primary-red);
+}
+
+.bb-preloader-sub {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.bb-preloader-track {
+  width: min(320px, 76vw);
+  height: 6px;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.bb-preloader-track span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-red),
+    var(--accent-red),
+    var(--gold)
+  );
+  box-shadow: 0 0 18px rgba(209, 49, 4, 0.55);
+  animation: bbPreloaderBar 1.15s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.bb-preloader-status {
+  margin-top: 14px;
+  color: rgba(255, 255, 255, 0.60);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  animation: bbPreloaderTextPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes bbPreloaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bbPreloaderFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes bbPreloaderPulse {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.06);
+    opacity: 0.15;
+  }
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
+
+@keyframes bbPreloaderBar {
+  0% {
+    transform: translateX(-130%);
+  }
+  50% {
+    transform: translateX(95%);
+  }
+  100% {
+    transform: translateX(270%);
+  }
+}
+
+@keyframes bbPreloaderTextPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   BB PROFESSIONAL ABOUT BUSINESS SECTION
+   Replaces the slider
+===================================================== */
+.bb-about-business {
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(209, 49, 4, 0.25), transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(251, 191, 36, 0.12), transparent 22%),
+    linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #35120c 100%);
+  padding: clamp(2.75rem, 6vw, 5.5rem) 0;
+  scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+.bb-about-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size:
+    58px 58px,
+    58px 58px;
+}
+
+.bb-about-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.8rem, 4vw, 3.25rem);
+  align-items: center;
+}
+
+.bb-about-media {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.bb-about-media-frame {
+  position: relative;
+  border-radius: 32px;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.bb-about-media-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 28%);
+  pointer-events: none;
+}
+
+.bb-about-media-frame img {
+  display: block;
+  width: 100%;
+  min-height: 280px;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.bb-about-media-glow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -18%;
+  height: 38%;
+  background: radial-gradient(circle, rgba(209, 49, 4, 0.55), transparent 68%);
+  filter: blur(42px);
+  z-index: -1;
+}
+
+.bb-about-floating-card {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: min(250px, 72%);
+  padding: 0.85rem 1rem;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.90);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: bbAboutFloat 5s ease-in-out infinite;
+}
+
+.bb-about-floating-card i {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+  color: #ffffff;
+  font-size: 1.15rem;
+  box-shadow: 0 8px 18px rgba(209, 49, 4, 0.28);
+}
+
+.bb-about-floating-card strong {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.bb-about-floating-card span {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.bb-about-floating-card--top {
+  top: 14px;
+  right: clamp(8px, 2vw, 18px);
+}
+
+.bb-about-floating-card--bottom {
+  bottom: 16px;
+  left: clamp(8px, 2vw, 18px);
+  animation-delay: 1.15s;
+}
+
+.bb-about-content {
+  max-width: 820px;
+}
+
+.bb-about-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: rgba(209, 49, 4, 0.16);
+  border: 1px solid rgba(209, 49, 4, 0.38);
+  color: #ffd7c7;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.bb-about-kicker i {
+  color: var(--gold);
+}
+
+.bb-about-content h2 {
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  color: #ffffff;
+}
+
+.bb-about-content h2 span {
+  background: linear-gradient(135deg, var(--primary-red), var(--gold));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.bb-about-content > p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 2vw, 1.08rem);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  max-width: 68ch;
+}
+
+.bb-about-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bb-about-feature-grid article {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+  padding: 1.1rem;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.bb-about-feature-grid article:hover {
+  transform: translateY(-4px);
+  border-color: rgba(209, 49, 4, 0.50);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.18);
+}
+
+.bb-about-feature-grid i {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: rgba(209, 49, 4, 0.16);
+  color: #ff9d77;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.bb-about-feature-grid h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: #ffffff;
+}
+
+.bb-about-feature-grid p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.bb-about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.bb-about-stats > div {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 16px;
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.bb-about-stats strong {
+  display: block;
+  color: var(--gold);
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.bb-about-stats span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.82rem;
+}
+
+.bb-about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.bb-about-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  padding: 0.9rem 1.25rem;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.bb-about-btn--primary {
+  background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(209, 49, 4, 0.30);
+}
+
+.bb-about-btn--whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.24);
+}
+
+.bb-about-btn--ghost {
+  background: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.bb-about-btn:hover,
+.bb-about-btn:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.bb-about-btn--primary:hover,
+.bb-about-btn--primary:focus-visible {
+  box-shadow: 0 14px 30px rgba(209, 49, 4, 0.38);
+}
+
+.bb-about-btn--whatsapp:hover,
+.bb-about-btn--whatsapp:focus-visible {
+  box-shadow: 0 14px 30px rgba(37, 211, 102, 0.32);
+}
+
+.bb-about-btn--ghost:hover,
+.bb-about-btn--ghost:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+.bb-about-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Scroll reveal animation - only activated when JS adds .bb-about-js */
+.bb-about-js .bb-fade-up {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.bb-about-js .bb-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes bbAboutFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+@media (min-width: 640px) {
+  .bb-about-feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .bb-about-wrap {
+    grid-template-columns: 1.02fr 1.35fr;
+  }
+
+  .bb-about-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .bb-about-floating-card {
+    padding: 0.72rem 0.82rem;
+    border-radius: 15px;
+  }
+
+  .bb-about-floating-card i {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+    border-radius: 11px;
+    font-size: 1rem;
+  }
+
+  .bb-about-floating-card strong {
+    font-size: 0.86rem;
+  }
+
+  .bb-about-floating-card span {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .bb-about-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .bb-about-btn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   ACCESSIBILITY / REDUCED MOTION
+===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  #bb-preloader,
+  .bb-preloader-logo,
+  .bb-preloader-logo::before,
+  .bb-preloader-logo::after,
+  .bb-preloader-track span,
+  .bb-preloader-status,
+  .bb-about-floating-card {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .bb-about-js .bb-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
 </style>
 </head>
 <body>
+    <!-- ========== BB ADVANCED PRELOADER ========== -->
+<noscript>
+  <style>
+    #bb-preloader {
+      display: none !important;
+    }
+  </style>
+</noscript>
+
+<div
+  id="bb-preloader"
+  role="status"
+  aria-live="polite"
+  aria-label="Loading Butcher Block"
+>
+  <div class="bb-preloader-card">
+    <div class="bb-preloader-logo">
+      <img
+        src="images/butcherblock-logo.jpg"
+        alt="Butcher Block Logo"
+        loading="eager"
+      />
+    </div>
+
+    <div class="bb-preloader-title">
+      Butcher <span>Block</span>
+    </div>
+
+    <p class="bb-preloader-sub">
+      Premium A-Grade Meats | Mpumalanga
+    </p>
+
+    <div class="bb-preloader-track">
+      <span></span>
+    </div>
+
+    <div class="bb-preloader-status">
+      Preparing fresh cuts...
+    </div>
+  </div>
+</div>
+
+<script>
+  document.documentElement.classList.add("bb-preloading");
+</script>
+<!-- ========== END BB ADVANCED PRELOADER ========== -->
 <!-- ⚡ INSTANT PRODUCTS: Google Apps Script injects the live product JSON here on every sync,
      so the catalog is already in the page — no fetch, no localStorage wait, no flash of "loading". -->
 <script>window.BB_INLINE_PRODUCTS=__BB_PRODUCTS_PLACEHOLDER__;window.BB_INLINE_PRODUCTS_HASH="__BB_PRODUCTS_HASH_PLACEHOLDER__";</script>
@@ -2494,18 +3204,156 @@ right: 1rem !important;
 </div>
 </div>
 </nav>
-<!-- Hero Swiper Slider -->
-<div id="slider-container"></div>
-<!-- Search & Filter Bar -->
-<div class="search-filter-bar" id="searchFilterBar">
-<div class="search-filter-container">
-<div class="search-box">
-<i class="fas fa-search" aria-hidden="true"></i>
-<input type="text" id="searchInput" placeholder="Search products..." aria-label="Search products">
-<button class="clear-search" id="clearSearch" aria-label="Clear search">
-<i class="fas fa-times" aria-hidden="true"></i>
-</button>
-</div>
+<!-- ========== BB PROFESSIONAL ABOUT BUSINESS HERO ========== -->
+<section
+  class="bb-about-business"
+  id="about-business"
+  aria-label="About Butcher Block"
+>
+  <div class="bb-about-bg" aria-hidden="true"></div>
+
+  <div class="bb-about-wrap">
+    <!-- Left Side: Visual / Media -->
+    <div class="bb-about-media">
+      <div class="bb-about-media-frame">
+        <!-- You can replace this with a real butchery photo if you have one -->
+        <img
+          src="images/butcherblock-logo.jpg"
+          alt="Butcher Block premium butchery in Mpumalanga"
+          loading="eager"
+        />
+        <div class="bb-about-media-glow" aria-hidden="true"></div>
+      </div>
+
+      <div class="bb-about-floating-card bb-about-floating-card--top">
+        <i class="fas fa-award" aria-hidden="true"></i>
+        <div>
+          <strong>A-Grade Quality</strong>
+          <span>Fresh, trusted cuts</span>
+        </div>
+      </div>
+
+      <div class="bb-about-floating-card bb-about-floating-card--bottom">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <div>
+          <strong>WhatsApp Orders</strong>
+          <span>Fast response</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Business Information -->
+    <div class="bb-about-content">
+      <span class="bb-about-kicker">
+        <i class="fas fa-fire" aria-hidden="true"></i>
+        Premium Butchery in Mpumalanga
+      </span>
+
+      <h2>
+        Professional Butchery.
+        <span>Premium Meat. Trusted Service.</span>
+      </h2>
+
+      <p>
+        Butcher Block supplies families, restaurants, caterers and bulk buyers
+        with high-quality A-grade beef, lamb, chicken, processed meats and
+        specialty cuts. From single premium steaks to bulk primal orders, we
+        deliver freshness, consistency and professional service.
+      </p>
+
+      <div class="bb-about-feature-grid">
+        <article>
+          <i class="fas fa-medal" aria-hidden="true"></i>
+          <h3>A-Grade Quality</h3>
+          <p>
+            Strictly selected, fresh, compliant meat cuts prepared with
+            professional butchery standards.
+          </p>
+        </article>
+
+        <article>
+          <i class="fas fa-truck-fast" aria-hidden="true"></i>
+          <h3>Bulk &amp; Retail Supply</h3>
+          <p>
+            Single orders, family packs, restaurant supply and bulk primal cuts
+            handled efficiently.
+          </p>
+        </article>
+
+        <article>
+          <i class="fas fa-shield-halved" aria-hidden="true"></i>
+          <h3>Trusted &amp; Compliant</h3>
+          <p>
+            Food-safety focused, transparent pricing and reliable service across
+            Mpumalanga.
+          </p>
+        </article>
+
+        <article>
+          <i class="fas fa-headset" aria-hidden="true"></i>
+          <h3>Easy Ordering</h3>
+          <p>
+            Order via WhatsApp, phone, email or website cart with quick
+            confirmation.
+          </p>
+        </article>
+      </div>
+
+      <div class="bb-about-stats">
+        <div>
+          <strong>100%</strong>
+          <span>A-Grade Focus</span>
+        </div>
+
+        <div>
+          <strong>Retail + Bulk</strong>
+          <span>Order Sizes</span>
+        </div>
+
+        <div>
+          <strong>Mpumalanga</strong>
+          <span>Local Supply</span>
+        </div>
+
+        <div>
+          <strong>4.9/5</strong>
+          <span>Customer Rating</span>
+        </div>
+      </div>
+
+      <div class="bb-about-actions">
+        <button
+          type="button"
+          class="bb-about-btn bb-about-btn--primary"
+          onclick="openAboutModal()"
+        >
+          <i class="fas fa-building" aria-hidden="true"></i>
+          View Full Business Profile
+        </button>
+
+        <a
+          class="bb-about-btn bb-about-btn--whatsapp"
+          href="https://wa.me/27615023930?text=Hi%20Butcher%20Block!%20I%20would%20like%20to%20place%20an%20order."
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          Order via WhatsApp
+        </a>
+
+        <a
+          class="bb-about-btn bb-about-btn--ghost"
+          href="#premium-steaks"
+          onclick="scrollToSection('premium-steaks'); return false;"
+        >
+          <i class="fas fa-arrow-down" aria-hidden="true"></i>
+          Shop Products
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ========== END BB PROFESSIONAL ABOUT BUSINESS HERO ========== -->
 <div class="filter-chips" id="filterChips">
 <button class="filter-chip active" data-filter="all">
 <i class="fas fa-th" aria-hidden="true"></i> All
@@ -3547,23 +4395,96 @@ originalToggleCart();
 if (willOpen) lockScroll();
 else unlockScroll();
 };
-// === SLIDER ===
-fetch('slider.html').then(res => res.ok ? res.text() : Promise.reject('slider.html not found'))
-.then(html => {
-document.getElementById('slider-container').innerHTML = html;
-if (typeof Swiper !== 'undefined') {
-new Swiper('.mySwiper', {
-spaceBetween: 0, centeredSlides: true,
-autoplay: { delay: 3000, disableOnInteraction: false },
-pagination: { el: '.swiper-pagination', clickable: true },
-navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-loop: true, effect: 'fade', fadeEffect: { crossFade: true }
-});
+// === ADVANCED SLIDER LOADER ===
+function loadSlider() {
+    fetch('slider.html')
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            return res.text();
+        })
+        .then(html => {
+            const container = document.getElementById('slider-container');
+            if (!container) throw new Error('Slider container not found');
+            
+            container.innerHTML = html;
+            console.log('✅ Slider HTML loaded');
+            
+            // Re-execute scripts in the fetched HTML (critical for randomization)
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(oldScript => {
+                const newScript = document.createElement('script');
+                Array.from(oldScript.attributes).forEach(attr => 
+                    newScript.setAttribute(attr.name, attr.value)
+                );
+                newScript.textContent = oldScript.textContent;
+                oldScript.replaceWith(newScript);
+            });
+            
+            // Wait for Swiper to be available
+            const initSlider = () => {
+                if (typeof Swiper !== 'undefined') {
+                    // Destroy existing instance if any
+                    if (window.mySwiperInstance) {
+                        window.mySwiperInstance.destroy(true, true);
+                    }
+                    
+                    window.mySwiperInstance = new Swiper('.mySwiper', {
+                        loop: true,
+                        grabCursor: true,
+                        effect: 'slide',
+                        speed: 600,
+                        autoplay: {
+                            delay: 3500,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                        },
+                        pagination: {
+                            el: '.swiper-pagination',
+                            clickable: true,
+                            dynamicBullets: true,
+                        },
+                        navigation: {
+                            nextEl: '.swiper-button-next',
+                            prevEl: '.swiper-button-prev',
+                        },
+                        keyboard: { enabled: true, onlyInViewport: true },
+                        a11y: {
+                            enabled: true,
+                            prevSlideMessage: 'Previous slide',
+                            nextSlideMessage: 'Next slide',
+                        }
+                    });
+                    console.log('✅ Swiper initialized');
+                } else {
+                    console.warn('⏳ Swiper not loaded yet, retrying...');
+                    setTimeout(initSlider, 100);
+                }
+            };
+            
+            initSlider();
+        })
+        .catch(err => {
+            console.error('❌ Slider error:', err);
+            const container = document.getElementById('slider-container');
+            if (container) {
+                container.innerHTML = `
+                    <div style="text-align:center;padding:40px;background:#fff5f5;border:2px dashed #d81b60;border-radius:12px;margin:20px 0;">
+                        <div style="font-size:3rem;margin-bottom:1rem;">⚠️</div>
+                        <h3 style="color:#d81b60;margin-bottom:0.5rem;">Slider Not Loading</h3>
+                        <p style="color:#666;margin-bottom:1rem;">${err.message}</p>
+                        <p style="font-size:0.9rem;color:#999;">Check browser console for details</p>
+                    </div>
+                `;
+            }
+        });
 }
-}).catch(err => {
-console.error('Slider error:', err);
-document.getElementById('slider-container').innerHTML = `<div style="text-align:center;padding:40px;color:#d13104;">⚠️ Slider unavailable</div>`;
-});
+
+// Load slider when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadSlider);
+} else {
+    loadSlider();
+}
 // ========== 🚀 DYNAMIC PRODUCT SCHEMA GENERATION ==========
 // Automatically creates Product structured data for Google Shopping
 function generateProductSchema() {
@@ -3938,5 +4859,104 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 });
 </script>
+<!-- ========== BB PRELOADER SCRIPT ========== -->
+<script>
+  (function () {
+    const preloader = document.getElementById("bb-preloader");
+    if (!preloader) return;
+
+    let hidden = false;
+
+    function hidePreloader() {
+      if (hidden) return;
+      hidden = true;
+
+      preloader.classList.add("bb-preloader-hidden");
+      preloader.setAttribute("aria-hidden", "true");
+      document.documentElement.classList.remove("bb-preloading");
+
+      setTimeout(function () {
+        if (preloader.parentNode) {
+          preloader.parentNode.removeChild(preloader);
+        }
+      }, 2550);
+    }
+
+    const minimumDelay = new Promise(function (resolve) {
+      setTimeout(resolve, 1950);
+    });
+
+    const pageLoaded = new Promise(function (resolve) {
+      if (document.readyState === "complete") {
+        resolve();
+        return;
+      }
+
+      window.addEventListener("load", resolve, { once: true });
+    });
+
+    Promise.all([minimumDelay, pageLoaded])
+      .then(hidePreloader)
+      .catch(hidePreloader);
+
+    // Safety fallback: hide preloader even if some asset gets stuck
+    setTimeout(hidePreloader, 6000);
+
+    // Helps with browser back/forward cache
+    window.addEventListener("pageshow", hidePreloader);
+  })();
+</script>
+<!-- ========== END BB PRELOADER SCRIPT ========== -->
+ <!-- ========== BB ABOUT BUSINESS ANIMATION SCRIPT ========== -->
+<script>
+  (function () {
+    const aboutSection = document.querySelector(".bb-about-business");
+    if (!aboutSection) return;
+
+    aboutSection.classList.add("bb-about-js");
+
+    const animatedItems = aboutSection.querySelectorAll(
+      ".bb-about-media, .bb-about-content, .bb-about-feature-grid article, .bb-about-stats > div"
+    );
+
+    animatedItems.forEach(function (el, index) {
+      el.classList.add("bb-fade-up");
+      el.style.transitionDelay = index * 55 + "ms";
+    });
+
+    function revealItem(el) {
+      el.classList.add("is-visible");
+
+      setTimeout(function () {
+        el.style.transitionDelay = "0ms";
+      }, 1900);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      animatedItems.forEach(revealItem);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            revealItem(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px"
+      }
+    );
+
+    animatedItems.forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+<!-- ========== END BB ABOUT BUSINESS ANIMATION SCRIPT ========== -->
 </body>
 </html>
